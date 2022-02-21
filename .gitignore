@@ -1,0 +1,7 @@
+*.pdf
+*.dbm
+*.docx
+*.odt
+diagramme package
+diagramme de contexte
+venv
