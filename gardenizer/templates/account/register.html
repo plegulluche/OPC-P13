@@ -1,0 +1,22 @@
+{% extends 'website/index.html' %}
+
+{% block content %}
+<form action="{% url 'register' %}" method="post">
+    {% csrf_token %}
+    
+    <h2>Create Account</h2>
+    {% if message %}
+    <div class="alert alert-danger" role="alert">
+        <h2>{{ message }}</h2>
+    </div>
+    {% endif %}
+    <input type="text" placeholder="Pseudo" name="username"/><br>
+    <input type="text" placeholder="Prénom" name="firstname"/><br>
+    <input type="text" placeholder="Nom" name="lastname"/><br>
+    <input type="email" placeholder="Email" name="email"/><br>
+    <input type="password" placeholder="Password" name="password"/>
+    <button class="btn btn-warning" type="submit" name="register">Sign Up</button>
+</form>
+{% endblock content %}
+
+

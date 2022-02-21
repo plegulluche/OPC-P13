@@ -1,0 +1,7 @@
+from django.shortcuts import render
+
+
+def mainpage(request):
+    context = {}
+
+    return render(request, "website/index.html", context)

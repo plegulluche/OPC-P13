@@ -5,6 +5,8 @@ class MyAccountManager(BaseUserManager):
     def create_user(self, email, username, password=None):
         if not email:
             raise ValueError("users must have an email address")
+        if not username:
+            raise ValueError("users must have a username")
 
         user = self.model(
             email=self.normalize_email(email),
@@ -31,7 +33,8 @@ class MyAccountManager(BaseUserManager):
 
 class Account(AbstractBaseUser):
     email = models.EmailField(verbose_name="email", max_length=60, unique=True)
-    firstname = models.CharField(max_length=100, unique=True)
+    username = models.CharField(max_length=30, unique=True, default="")
+    firstname = models.CharField(max_length=100)
     lastname = models.CharField(max_length=150)
     date_joined = models.DateTimeField(verbose_name="date joined", auto_now_add=True)
     last_login = models.DateTimeField(verbose_name="last login", auto_now=True)
@@ -39,6 +42,7 @@ class Account(AbstractBaseUser):
     is_active = models.BooleanField(verbose_name="is active", default=True)
     is_staff = models.BooleanField(verbose_name="is staff", default=False)
     is_superuser = models.BooleanField(verbose_name="is super", default=False)
+
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = [

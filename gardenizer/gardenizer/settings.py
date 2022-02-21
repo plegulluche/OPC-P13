@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # APP
     'account.apps.AccountConfig',
     'event.apps.EventConfig',
+    'website.apps.WebsiteConfig',
     
 ]
 
@@ -55,6 +56,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'gardenizer.urls'
+
+AUTH_USER_MODEL = "account.Account"
 
 TEMPLATES = [
     {
