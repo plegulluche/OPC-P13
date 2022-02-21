@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth import logout, login, authenticate
 from account.models import Account
 
 
@@ -48,3 +49,25 @@ def registration_view(request):
             return render(request, "account/register.html", {"message": message})
     
     return render(request, 'account/register.html')    
+
+def login_view(request):
+    message = ""
+    if request.method == "POST":
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        user = Account.objects.filter(email=email).first()
+        if user:
+            utlisateur_auth = authenticate(email=user.email, password=password)
+            if utlisateur_auth:
+                login(request, utlisateur_auth)
+                return redirect("mainpage")
+            else:
+                message = "vos identifiants ne sont pas corrects"
+        else:
+            message = "aucun utilisateur ne correspond a ces informations"
+    
+    return render(request, "account/login.html", {"message": message})
+
+def logout_view(request):
+    logout(request)
+    return redirect('mainpage')
