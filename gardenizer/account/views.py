@@ -2,11 +2,9 @@ from django.shortcuts import render
 from account.models import Account
 
 
-
-
-
-
 def registration_view(request):
+    """View managing the user creation"""
+    
     message = ''
     if request.method == 'POST':
         username = request.POST.get("username")
@@ -20,7 +18,7 @@ def registration_view(request):
         if user_exists:
             message = "cet email est déjà utilisé"
             return render(request, "account/register.html", {"message": message})
-        if user_exists:
+        if username_exists:
             message = "ce pseudo est déjà pris"
             return render(request, "account/register.html", {"message": message})
         if email != "":
