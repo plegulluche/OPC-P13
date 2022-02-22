@@ -1,7 +1,7 @@
 {% extends 'website/index.html' %}
 
 {% block content %}
-<form action="{% url 'register' %}" method="post">
+<form action="{% url 'addevent' %}" method="post" name="add">
     {% csrf_token %}
     
     <h2>Create Event</h2>
@@ -10,18 +10,27 @@
         <h2>{{ message }}</h2>
     </div>
     {% endif %}
+    <p>INTITULE</p>
     <input type="text" placeholder="Intitulé" name="title"/><br>
-    <input type="date" placeholder=" date de début" name="startdate"/><br>
-    <input type="time" placeholder="heure" name="starttime"/><br>
-    <input type="date" placeholder="date de fin" name="enddate"/><br>
-    <input type="time" placeholder="heure" name="endtime"/><br>
+    <p>DATE DEBUT</p>
+    <input type="datetime-local" placeholder=" date de début" name="startdate"/><br>
+    <p>DATE FIN</p>
+    <input type="datetime-local" placeholder="date de fin" name="enddate"/><br>
+    <p>COMMENTAIRE OU DESCRIPTION</p>
     <input type="text" placeholder="Commentaire" name="description"/><br>
+    <p>CATEGORIE</p>
         <select name="category" id="">
             {% for category in categories %}
                 <option value={{category.id}}>{{ category.title }}<option/><br>
             {% endfor %}
         </select>
-    <input type="text" placeholder="Ville" name="city"/><br>
+        <p>VILLE</p>
+        <select name="city" id="">
+            {% for city in cities %}
+            <option value={{city.id}}>{{ city.name }}<option/><br>
+            {% endfor %}
+        </select>
+    
     <button class="btn btn-warning" type="submit" name="register">Sign Up</button>
 </form>
 {% endblock content %}

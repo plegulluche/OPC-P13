@@ -1,4 +1,7 @@
 <h1>PAGE DE TEST PRINCIPALE</h1>
+{% if request.user.is_authenticated %}
+<p style="color: #000000;">Hello , {{request.user.username}}</p>
+{% endif %}
 
 {% block content %}
 
