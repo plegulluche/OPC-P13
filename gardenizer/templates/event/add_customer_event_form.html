@@ -1,7 +1,7 @@
 {% extends 'website/index.html' %}
 
 {% block content %}
-<form action="{% url 'addevent' %}" method="post" name="add">
+<form action="{% url 'add_customer_event' %}" method="post">
     {% csrf_token %}
     
     <h2>Create Event</h2>
@@ -10,6 +10,7 @@
         <h2>{{ message }}</h2>
     </div>
     {% endif %}
+    
     <p>INTITULE</p>
     <input type="text" placeholder="Intitulé" name="title"/><br>
     <p>DATE DEBUT</p>
@@ -18,19 +19,20 @@
     <input type="datetime-local" placeholder="date de fin" name="enddate"/><br>
     <p>COMMENTAIRE OU DESCRIPTION</p>
     <input type="text" placeholder="Commentaire" name="description"/><br>
-    <p>CATEGORIE</p>
-        <select name="category" id="">
-            {% for category in categories %}
-                <option value={{category.id}}>{{ category.title }}<option/><br>
-            {% endfor %}
-        </select>
+    
         <p>VILLE</p>
         <select name="city" id="">
             {% for city in cities %}
             <option value={{city.id}}>{{ city.name }}<option/><br>
             {% endfor %}
         </select>
+    <p>CLIENT</p>
+        <select name="customer" id="">
+            {% for customer in customers %}
+                <option value={{customer.id}}>{{ customer.lastname }}<option/><br>
+            {% endfor %}
+        </select>
     
-    <button class="btn btn-warning" type="submit" name="register">Sign Up</button>
+    <button class="btn btn-warning" type="submit" name="register">Enregistrer evenement</button>
 </form>
 {% endblock content %}

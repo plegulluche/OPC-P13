@@ -47,7 +47,7 @@ class Command(BaseCommand):
         Adding categories to the corresponding table in DB.
         """
         
-        category_list = ["Entretient et révision matériel", "Tonte", "Taille", "élaguage", "Autre"]
+        category_list = ["Entretient et révision matériel", "Chantier"]
         for category in tqdm(category_list):
             obj, created = Category.objects.get_or_create(
                 title = f"{category}"

@@ -1,0 +1,25 @@
+{% extends 'website/index.html' %}
+
+{% block content %}
+
+<h1>PAGE DE COMPTE</h1>
+
+<p>LISTE DES EVENTS</p>
+{% for event in events %}
+    <ul>
+        <li>{{ event.title}}</li>
+        <li>{{ event.description}}</li>
+        <li>{{ event.customer}}</li>
+    </ul>
+{% endfor %}
+
+<p>LISTE DES CLIENTS </p>
+    {% for customer in customers %}
+    <ul>
+        <li>{{ customer.firstname}}</li>
+        <li>{{ customer.lastname}}</li>
+        <li>{{ customer.company}}</li>
+        <li>{{customer.streetnumber}}  {{ customer.streetname}} </li>
+    </ul>
+    {% endfor %}
+{% endblock content %}

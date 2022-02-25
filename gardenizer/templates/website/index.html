@@ -1,8 +1,62 @@
-<h1>PAGE DE TEST PRINCIPALE</h1>
-{% if request.user.is_authenticated %}
-<p style="color: #000000;">Hello , {{request.user.username}}</p>
-{% endif %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gardenizer</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" 
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+</head>
+
+<body>
+<header>
+    <p>PAGE ACCEUIL</p>
+    <p><a href="{% url 'login' %}">LOGIN</a></p>
+    <p><a href="{% url 'register' %}">REGISTER</a></p>
+    {% block meteo %}
+        <table>
+            <tr>
+                <td>1</td>
+                <td>Peter Parker</td>
+                <td>16</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Clark Kent</td>
+                <td>34</td>
+            </tr>
+        </table>
+    {% endblock meteo %}
+
+    {% if request.user.is_authenticated %}
+    <p style="color: #000000;">Hello , {{request.user.username}}</p>
+    <p><a href="{% url 'logout' %}">LOGOUT</a></p>
+
+    <p><a href="{% url 'account' %}">MON COMPTE</a></p>
+    <p><a href="{% url 'mainpage' %}">Retour a l acceuil</a></p>
+
+    <p><a href="{% url 'select_event_type' %}">ajouter evenement</a></p>
+    <p><a href="{% url 'add_customer' %}">ajouter client</a></p>
+    
+
+    {% endif %}
+</header>
 
 {% block content %}
 
 {% endblock content %}
+
+        <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous">
+        </script>
+        <script 
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" 
+            integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" 
+            crossorigin="anonymous">
+        </script>
+    </body>
+</html>

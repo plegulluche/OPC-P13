@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login, authenticate
+from django.contrib.auth.decorators import login_required
 from account.models import Account
+from event.models import Customer, Evenement
 
 
 def registration_view(request):
@@ -71,3 +73,12 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('mainpage')
+
+@login_required
+def account_view(request):
+    active_user = request.user.id
+    all_events = Evenement.objects.filter(user=active_user)
+    all_customers = Customer.objects.filter(user=active_user)
+    context = {"events": all_events, "customers": all_customers}
+    
+    return render(request, 'account/account.html', context)

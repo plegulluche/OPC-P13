@@ -58,6 +58,10 @@ ROOT_URLCONF = 'gardenizer.urls'
 
 AUTH_USER_MODEL = "account.Account"
 
+LOGIN_URL = '/login/'
+LOGOUT_REDIRECT_URL = ''
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

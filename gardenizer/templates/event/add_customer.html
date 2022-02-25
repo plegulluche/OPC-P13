@@ -1,0 +1,35 @@
+{% extends 'website/index.html' %}
+
+{% block content %}
+<form action="{% url 'addcustomer' %}" method="post">
+    {% csrf_token %}
+    
+    <h2>Create Customer</h2>
+    {% if message %}
+    <div class="alert alert-danger" role="alert">
+        <h2>{{ message }}</h2>
+    </div>
+    {% endif %}
+    <p>PRENOM</p>
+    <input type="text" placeholder="Prenom" name="firstname"/><br>
+    <p>NOM</p>
+    <input type="text" placeholder="NOM" name="lastname"/><br>
+    <p>TEL</p>
+    <input type="text" placeholder="Numero de tel" name="phone"/><br>
+    <p>COMPANY</p>
+    <input type="text" placeholder="Nom de la compagnie" name="company"/><br>
+    <p>ADRESSE</p>
+        <p>VILLE</p>
+        <select name="city" id="">
+            {% for city in cities %}
+            <option value={{city.id}}>{{ city.name }}<option/><br>
+            {% endfor %}
+        </select>
+        <p>NUMERO</p>
+        <input type="text" placeholder="numero" name="number"/><br>
+        <p>RUE OU VOIE</p>
+        <input type="text" placeholder="nom de la voie" name="streetname"/><br>
+    
+    <button class="btn btn-warning" type="submit" name="register">Enregistrer client</button>
+</form>
+{% endblock content %}

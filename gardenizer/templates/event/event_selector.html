@@ -1,0 +1,17 @@
+{% extends 'website/index.html' %}
+
+{% block content %}
+<form action="{% url "select_event_type" %}" method="post">
+    {% csrf_token %}
+    
+    <h2>Create Event</h2>
+    
+    <p>SELECTIONNER LE TYPE D EVENEMENT</p>
+        <select name="category" id="">
+            {% for category in categories %}
+                <option value={{category.id}}>{{ category.title }}<option/><br>
+            {% endfor %}
+        </select>
+        <button class="btn btn-warning" type="submit" name="register">Selectionner evenement</button>
+</form>
+{% endblock %}
