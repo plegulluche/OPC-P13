@@ -1,0 +1,27 @@
+{% extends 'website/index.html' %}
+
+{% block content %}
+<h1>Event list</h1>
+<table>
+        <tr>
+            <td>Titre</td>
+            <td>Date de début</td>
+            <td>Description</td>
+            <td>Catégorie</td>
+            <td>Client</td>
+            <td>suppression</td>
+            <td>edition</td>
+        </tr>
+    {% for event in events %}  
+        <tr>
+            <td>{{ event.title }}</td>
+            <td>{{ event.event_start }}</td>
+            <td>{{ event.description }}</td>
+            <td>{{ event.category }}</td>
+            <td>{{ event.customer }}</td>
+            <td><a href="{% url 'update_event' event.id %}">Modifier Chantier ou entretient</a></td>
+            <td><a href="{% url 'delete_event' event.id %}">Supprimer Chantier ou entretient</a></td>
+        </tr> 
+    {% endfor %}
+</table>
+{% endblock content %}

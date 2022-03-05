@@ -21,4 +21,5 @@ urlpatterns = [
     path('', include('account.urls')),
     path('', include('website.urls')),
     path('', include('event.urls')),
+    path('', include('meteo.urls')),
 ]

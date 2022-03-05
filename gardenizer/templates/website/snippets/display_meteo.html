@@ -1,0 +1,28 @@
+<hr>
+    <table>
+        <thead>
+            <tr>
+            <th colspan="2">Previsions 15 prochains jours pour la ville de {{ meteo.insee }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td>Jour</td>
+            <td>Tendance</td>
+            <td>tmin</td>
+            <td>tmax</td>
+            </tr>
+            
+            {% for day in meteo_week %}
+            <tr>
+            <td>{{ day.day }}</td>
+            <td>{{ day.weather }}</td>
+            <td>{{ day.tmin }}</td>
+            <td>{{ day.tmax }}</td>
+             </tr>
+        {% endfor %}
+           
+        </tbody>
+    </table>
+
+<hr>

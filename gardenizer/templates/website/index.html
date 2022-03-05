@@ -12,23 +12,7 @@
 
 <body>
 <header>
-    <p>PAGE ACCEUIL</p>
-    <p><a href="{% url 'login' %}">LOGIN</a></p>
-    <p><a href="{% url 'register' %}">REGISTER</a></p>
-    {% block meteo %}
-        <table>
-            <tr>
-                <td>1</td>
-                <td>Peter Parker</td>
-                <td>16</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Clark Kent</td>
-                <td>34</td>
-            </tr>
-        </table>
-    {% endblock meteo %}
+
 
     {% if request.user.is_authenticated %}
     <p style="color: #000000;">Hello , {{request.user.username}}</p>
@@ -36,18 +20,27 @@
 
     <p><a href="{% url 'account' %}">MON COMPTE</a></p>
     <p><a href="{% url 'mainpage' %}">Retour a l acceuil</a></p>
-
-    <p><a href="{% url 'select_event_type' %}">ajouter evenement</a></p>
-    <p><a href="{% url 'add_customer' %}">ajouter client</a></p>
-    
+        {% else %}
+        <p>PAGE ACCEUIL</p>
+        <p><a href="{% url 'login' %}">LOGIN</a></p>
+        <p><a href="{% url 'register' %}">REGISTER</a></p>
 
     {% endif %}
 </header>
-
+<hr>
+{% block meteo %}
+    
+        {% include 'website/snippets/meteo_selector.html' %} 
+    
+        {% include 'website/snippets/display_meteo.html' %}
+    
+{% endblock meteo %}
+<hr>
+<hr>
 {% block content %}
 
 {% endblock content %}
-
+<hr>
         <script
             src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="

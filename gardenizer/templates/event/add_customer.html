@@ -1,7 +1,7 @@
 {% extends 'website/index.html' %}
 
 {% block content %}
-<form action="{% url 'addcustomer' %}" method="post">
+<form action="{% url 'add_customer' %}" method="post">
     {% csrf_token %}
     
     <h2>Create Customer</h2>
@@ -19,7 +19,7 @@
     <p>COMPANY</p>
     <input type="text" placeholder="Nom de la compagnie" name="company"/><br>
     <p>ADRESSE</p>
-        <p>VILLE</p>
+        <label for="city">Selectionnez une ville</label>
         <select name="city" id="">
             {% for city in cities %}
             <option value={{city.id}}>{{ city.name }}<option/><br>

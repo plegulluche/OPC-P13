@@ -3,7 +3,6 @@
 {% block content %}
 <form action="{% url 'add_customer_event' %}" method="post">
     {% csrf_token %}
-    
     <h2>Create Event</h2>
     {% if message %}
     <div class="alert alert-danger" role="alert">

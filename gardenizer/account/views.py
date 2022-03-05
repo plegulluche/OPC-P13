@@ -1,74 +1,63 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.contrib.auth import logout, login, authenticate
+from django.contrib.auth import (
+logout, login, authenticate
+)
 from django.contrib.auth.decorators import login_required
 from account.models import Account
-from event.models import Customer, Evenement
+from account.forms import (
+    RegisterUserForm, AccountAuthenticationForm
+)
+from event.models import (
+    City, Customer, Evenement
+)
 
 
-def registration_view(request):
-    """View managing the user creation"""
+def registration_view(request ,*args, **kwargs):
+    """
+    View to register users and log them in uppon registration.
+    """
+    user = request.user
+    if user.is_authenticated:
+        return HttpResponse(f'Vous etes déjà autentifié en tant que {user.email}')
     
-    message = ''
+    context = {}
     if request.method == 'POST':
-        username = request.POST.get("username")
-        firstname = request.POST.get("firstname")
-        lastname = request.POST.get("lastname")
-        email = request.POST.get("email")
-        password = request.POST.get("password")
-
-        user_exists = Account.objects.filter(email=email).first()
-        username_exists = Account.objects.filter(username=username).first()
-        if user_exists:
-            message = "cet email est déjà utilisé"
-            return render(request, "account/register.html", {"message": message})
-        if username_exists:
-            message = "ce pseudo est déjà pris"
-            return render(request, "account/register.html", {"message": message})
-        if email != "":
-            if password != "":
-                if firstname != "":
-                    if lastname != "":   
-                        new_user = Account()
-                        new_user.email = email
-                        new_user.username = username
-                        new_user.firstname = firstname
-                        new_user.lastname = lastname
-                        new_user.password = password
-                        new_user.save()
-                        new_user.set_password(password)
-                        new_user.save()
-                    else:
-                        message = "Veuillez saisir tout les champs"
-                        return render(request, "account/register.html", {"message": message})
-                else:
-                    message = "Veuillez saisir tout les champs"
-                    return render(request, "account/register.html", {"message": message})
-            else:
-                message = "Veuillez saisir tout les champs"
-                return render(request, "account/register.html", {"message": message})
+        form = RegisterUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            email = form.cleaned_data.get('email').lower()
+            raw_password = form.cleaned_data.get('password1')
+            account = authenticate(email=email, password=raw_password)
+            login(request,account)
+            return redirect('mainpage')
         else:
-            message = "Veuillez saisir tout les champs"
-            return render(request, "account/register.html", {"message": message})
-    
-    return render(request, 'account/register.html')    
+            context['registration_form'] = form
+    else:
+        form = RegisterUserForm()
+        context["registration_form"] = form
+    return render(request, 'account/register.html',context)
 
+    
 def login_view(request):
-    message = ""
-    if request.method == "POST":
-        email = request.POST.get("email")
-        password = request.POST.get("password")
-        user = Account.objects.filter(email=email).first()
-        if user:
-            utlisateur_auth = authenticate(email=user.email, password=password)
-            if utlisateur_auth:
-                login(request, utlisateur_auth)
-                return redirect("mainpage")
-            else:
-                message = "vos identifiants ne sont pas corrects"
-        else:
-            message = "aucun utilisateur ne correspond a ces informations"
-    
-    return render(request, "account/login.html", {"message": message})
+    context = {}
+    user = request.user
+    if user.is_authenticated:
+        return redirect('mainpage')
+    if request.method == 'POST':
+        form = AccountAuthenticationForm(request.POST)
+        if form.is_valid():
+            email = request.POST.get('email')
+            password = request.POST.get('password')
+            user = authenticate(email=email,password=password)
+            if user:
+                login(request,user)
+                return redirect('mainpage')
+    else:
+        form = AccountAuthenticationForm()
+    context['login_form'] = form
+
+    return render(request, 'account/login.html',context)
 
 def logout_view(request):
     logout(request)
@@ -79,6 +68,21 @@ def account_view(request):
     active_user = request.user.id
     all_events = Evenement.objects.filter(user=active_user)
     all_customers = Customer.objects.filter(user=active_user)
-    context = {"events": all_events, "customers": all_customers}
+    cities = City.objects.all()
+    context = {"events": all_events, "customers": all_customers,"cities":cities}
     
     return render(request, 'account/account.html', context)
+
+@login_required
+def account_customer_view(request):
+    current_user = request.user.id
+    customers = Customer.objects.filter(user=current_user)
+    context = {"customers":customers}
+    return render(request,"account/account_customers.html",context)
+
+@login_required
+def account_events_view(request):
+    current_user = request.user.id
+    events = Evenement.objects.filter(user=current_user)
+    context = {"events":events}
+    return render(request,"account/account_events.html",context)

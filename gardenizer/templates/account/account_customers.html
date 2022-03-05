@@ -1,0 +1,26 @@
+{% extends 'website/index.html' %}
+
+{% block content %}
+<h1>Customers list</h1>
+<p><a href="{% url 'add_customer' %}">Ajouter un client</a></p>
+<table>
+        <tr>
+            <td>NOM</td>
+            <td>PRENOM</td>
+            <td>numero</td>
+            <td>adresse</td>
+            <td>edition</td>
+            <td>suppression</td>
+        </tr>
+    {% for customer in customers %}  
+        <tr>
+            <td>{{ customer.lastname }}</td>
+            <td>{{ customer.firstname }}</td>
+            <td>{{ customer.phone }}</td>
+            <td>{{ customer.street_number }},{{ customer.streetname }}, {{ customer.city.name }}</td>
+            <td><a href="{% url 'customer_update' customer.pk %}">edit customer</a></td>
+            <td><a href="{% url 'customer_delete' customer.pk %}">delete customer</a></td>
+        </tr> 
+    {% endfor %}
+</table>
+{% endblock content %}

@@ -3,23 +3,12 @@
 {% block content %}
 
 <h1>PAGE DE COMPTE</h1>
+<h2>Evenements</h2>
+<p><a href="{% url "add_customer_event" %}">Ajouter un chantier client</a></p>
+<p><a href="{% url "add_maintenance_event" %}">Ajouter une tache d'entretrient</a></p>
+<p><a href="{% url "account_event" %}">liste des evenements(edition et suppression)</a></p>
 
-<p>LISTE DES EVENTS</p>
-{% for event in events %}
-    <ul>
-        <li>{{ event.title}}</li>
-        <li>{{ event.description}}</li>
-        <li>{{ event.customer}}</li>
-    </ul>
-{% endfor %}
-
-<p>LISTE DES CLIENTS </p>
-    {% for customer in customers %}
-    <ul>
-        <li>{{ customer.firstname}}</li>
-        <li>{{ customer.lastname}}</li>
-        <li>{{ customer.company}}</li>
-        <li>{{customer.streetnumber}}  {{ customer.streetname}} </li>
-    </ul>
-    {% endfor %}
+<h2>Clients</h2>
+<p><a href="{% url 'account_customer' %}">Ajouter ou editer des clients</a></p>
+    
 {% endblock content %}

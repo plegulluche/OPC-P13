@@ -21,13 +21,14 @@ class Command(BaseCommand):
         """
         all_cities = []
         response = requests.get(
-            "https://geo.api.gouv.fr/communes?fields=nom,codesPostaux"
+            "https://geo.api.gouv.fr/communes?fields=nom,codesPostaux,centre,code"
         )
         data = response.json()
         for each_city in tqdm(data):
             if each_city["codesPostaux"] != []:
-                one_city = (each_city['nom'],each_city["codesPostaux"][0])
-                all_cities.append(one_city)
+                if 'centre' in each_city:
+                    one_city = (each_city['nom'],each_city["codesPostaux"][0],each_city['centre']['coordinates'][0],each_city['centre']['coordinates'][1],each_city['code'])
+                    all_cities.append(one_city)
         
         return all_cities
     
@@ -40,6 +41,9 @@ class Command(BaseCommand):
             obj, created = City.objects.get_or_create(
                 name=f"{each_city[0]}",
                 zipcode=f"{each_city[1]}",
+                latitude=each_city[2],
+                longitude=each_city[3],
+                insee=each_city[4],
             )
             
     def _add_categories(self):

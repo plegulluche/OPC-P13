@@ -1,0 +1,13 @@
+{% extends 'website/index.html' %}
+
+{% block content %}
+<div>
+    <p>Etes vous sur de vouloir supprimer cet evenement ? </p>
+    <form action="" method="post">
+        <input type="submit" value="oui">
+        {% csrf_token %}
+    </form>
+    <button type="button"><a href="{% url 'account_event' %}">Non</a></button>
+</div>
+
+{% endblock content %}

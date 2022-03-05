@@ -1,7 +1,7 @@
 from django.shortcuts import render
+from event.models import City
 
 
 def mainpage(request):
-    context = {}
 
-    return render(request, "website/index.html", context)
+    return render(request, "website/index.html")

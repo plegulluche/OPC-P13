@@ -1,0 +1,24 @@
+<hr/>
+<p>METEO 15J</p>
+
+<form action="{% url 'weekly_forecast' %}" method="get">
+    {% csrf_token %}
+    <p>RECHERCHER UNE VILLE</p>
+        <input type="text" name="q">
+        <button class="btn btn-warning" type="submit">Valider</button>
+</form>
+{% if cities %}
+    <p>SELECTIONNEZ VOTRE VILLE</p>
+        <form action="{% url 'weekly_forecast' %}" method="post">
+            {% csrf_token %}
+            <select name="city" id="">
+                {% for city in cities %}
+                <option value={{city.id}}>{{ city.name }}<option/><br>
+                {% endfor %}
+            </select>
+        <button class="btn btn-warning" type="submit">Choisir cette ville</button>
+        </form> 
+    {% else %}
+    <p>{{message}}</p>
+{% endif %}
+<hr/>
