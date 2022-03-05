@@ -2,7 +2,9 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from .models import Category,City,Customer,Evenement
 from account.models import Account
-
+from .forms import (
+    AddCustomerForm
+)
 
 
 @login_required
@@ -95,52 +97,23 @@ def add_customer_view(request):
     """
     View creating new customer from post data of a creation form
     """
-    message = ""
-    if request.method == "POST":
-        current_user_id = request.user.id
-        firstname = request.POST.get("firstname")
-        lastname = request.POST.get("lastname")
-        phone = request.POST.get("phone")
-        company = request.POST.get("company")
-        city_id = request.POST.get("city")
-        street_number = request.POST.get("number")
-        street_name = request.POST.get("streetname")
-        
-        if firstname != "":
-            if lastname != "":
-                if street_name != "":
-                    if street_number != "":
-                        if city_id != "":
-                            new_customer = Customer()
-                            new_customer.firstname = firstname
-                            new_customer.lastname = lastname
-                            new_customer.phone = phone
-                            new_customer.company = company
-                            new_customer.streetname = street_name
-                            new_customer.street_number = street_number
-                            new_customer.city = City.objects.get(id=int(city_id))
-                            new_customer.user = Account.objects.get(pk=current_user_id)
-                            new_customer.save()
-                            message = "Client ajouté avec succès"
-                        else:
-                            message = "Veuillez saisir tout les champs"
-                            return render(request, 'event/add_customer.html',context)
-                    else:
-                        message = "Veuillez saisir tout les champs"
-                        return render(request, 'event/add_customer.html',context)
-                else:
-                    message = "Veuillez saisir tout les champs"
-                    return render(request, 'event/add_customer.html',context)
-            else:
-                message = "Veuillez saisir tout les champs"
-                return render(request, 'event/add_customer.html',context)
+    context = {}
+    if request.method == 'POST':
+        form = AddCustomerForm(request.POST)
+        if form.is_valid():
+            form.save()
+            context['message'] = 'Client ajouté avec succès'
         else:
-            message = "Veuillez saisir tout les champs"
-            return render(request, 'event/add_customer.html',context)
-        
-    all_cities = City.objects.all()
-    context = {"message":message,"cities":all_cities}
-        
+            cities = City.objects.all()
+            context['cities'] = cities
+            context['add_customer_form'] = form
+            print(form.errors)
+            
+    else:
+        form = AddCustomerForm()
+        cities = City.objects.all()
+        context = {"cities":cities,"add_customer_form":form}    
+       
     return render(request, 'event/add_customer.html',context)
 
 @login_required

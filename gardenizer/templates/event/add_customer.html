@@ -3,13 +3,14 @@
 {% block content %}
 <form action="{% url 'add_customer' %}" method="post">
     {% csrf_token %}
-    
     <h2>Create Customer</h2>
+    <h3><a href="{% url 'account_customer' %}">Retour</a></h3>
     {% if message %}
     <div class="alert alert-danger" role="alert">
         <h2>{{ message }}</h2>
     </div>
     {% endif %}
+    <input type="hidden" name="user" value={{ request.user.id }}>
     <p>PRENOM</p>
     <input type="text" placeholder="Prenom" name="firstname"/><br>
     <p>NOM</p>
@@ -26,10 +27,23 @@
             {% endfor %}
         </select>
         <p>NUMERO</p>
-        <input type="text" placeholder="numero" name="number"/><br>
+        <input type="text" placeholder="numero" name="street_number"/><br>
         <p>RUE OU VOIE</p>
         <input type="text" placeholder="nom de la voie" name="streetname"/><br>
-    
+        {% if add_customer_form.errors %}
+        {% for field in add_customer_form %}
+            {% for errors in field.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ errors|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        {% for errors in form.non_field_errors %}
+            <div class="alert alert-danger">
+                <strong>{{ errors|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endif %}
     <button class="btn btn-warning" type="submit" name="register">Enregistrer client</button>
 </form>
 {% endblock content %}
