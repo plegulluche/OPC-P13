@@ -5,6 +5,7 @@
     {% csrf_token %}
     
     <h2>UPDATE Customer</h2>
+    <h2><a href="{% url 'account_customer' %}">Retour</a></h2>
     
     {% if message %}
     <div class="alert alert-danger" role="alert">

@@ -1,0 +1,39 @@
+{% extends 'website/index.html' %}
+
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    <h2>Editer évènement</h2>
+    <h3><a href="{% url 'account_event' %}">Retour</a></h3>
+    <p>{{ start }}</p>
+    {% if type == 'chantier' %}
+    
+    <p>TITLE</p>
+    <input type="text" name='title' required value={{ event.title }}>
+    <p>Date de début (FORMAT : DD/MM/YYYY HH:MM)</p>
+    <input type="text" name="event_start" id="" required value={{ start }}>
+    <p>Date de fin (FORMAT : DD/MM/YYYY HH:MM)</p>
+    <input type="text" name="event_end" required value={{ end }}>
+    <p>Description</p>
+    <textarea name="description" id="" cols="30" rows="10" >{{ event.description }}</textarea><br>
+    <p>CLIENT</p>
+        <select name="customer" id="" value={{ event.customer.lastname }}>
+            {% for customer in customers %}
+                <option value={{customer.id}}>{{ customer.lastname }}<option/><br>
+            {% endfor %}
+        </select>
+    
+    {% else %}
+    <p>TITLE</p>
+    <input type="text" name='title' required value={{ event.title }}>
+    <p>Date de début (FORMAT : DD/MM/YYYY HH:MM)</p>
+    <input type="text" name="event_start" id="" help='test' required value={{ start }}>
+    <p>Date de fin (FORMAT : DD/MM/YYYY HH:MM)</p>
+    <input type="text" name="event_end" required value={{ end }}>
+    <p>Description</p>
+    <textarea name="description" id="" cols="30" rows="10" >{{ event.description }}</textarea><br>
+
+    {% endif %}
+    <button class="btn btn-warning" type="submit" name="register">Enregistrer modifications</button>
+</form>
+{% endblock content %}

@@ -19,11 +19,27 @@ class AddCustomerForm(forms.ModelForm):
             )
     
         
-class AddEventForm(forms.ModelForm):
+class AddMaintenanceEventForm(forms.ModelForm):
+    
+    event_start = forms.DateTimeField()
+    event_end = forms.DateTimeField()
     
     class Meta:
         model = Evenement
-        fields = '__all__'
+        fields = (
+            'title',
+            'description',
+            )
+        
+class AddCustomerEventForm(forms.ModelForm):
+    
+    class Meta:
+        model = Evenement
+        fields = (
+            'title',
+            'description',
+            'customer',
+            )
     
     
         

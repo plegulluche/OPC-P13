@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from event.models import City
-from meteo.models import MeteoData
 from .management.meteo_data_manager import CacheManager
 
 

@@ -1,4 +1,4 @@
-from datetime import datetime,timezone
+from datetime import timezone
 from django.utils import timezone
 from meteo.models import MeteoData
 from .api import Weathermanager
