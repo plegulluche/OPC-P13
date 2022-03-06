@@ -10,26 +10,9 @@
         <h2>{{ message }}</h2>
     </div>
     {% endif %}
-    <input type="hidden" name="user" value={{ request.user.id }}>
-    <p>PRENOM</p>
-    <input type="text" placeholder="Prenom" name="firstname"/><br>
-    <p>NOM</p>
-    <input type="text" placeholder="NOM" name="lastname"/><br>
-    <p>TEL</p>
-    <input type="text" placeholder="Numero de tel" name="phone"/><br>
-    <p>COMPANY</p>
-    <input type="text" placeholder="Nom de la compagnie" name="company"/><br>
-    <p>ADRESSE</p>
-        <label for="city">Selectionnez une ville</label>
-        <select name="city" id="">
-            {% for city in cities %}
-            <option value={{city.id}}>{{ city.name }}<option/><br>
-            {% endfor %}
-        </select>
-        <p>NUMERO</p>
-        <input type="text" placeholder="numero" name="street_number"/><br>
-        <p>RUE OU VOIE</p>
-        <input type="text" placeholder="nom de la voie" name="streetname"/><br>
+    
+        {{ add_customer_form.as_p }}
+
         {% if add_customer_form.errors %}
         {% for field in add_customer_form %}
             {% for errors in field.errors %}

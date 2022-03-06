@@ -98,23 +98,23 @@ def add_customer_view(request):
     View creating new customer from post data of a creation form
     """
     context = {}
+    
     if request.method == 'POST':
         form = AddCustomerForm(request.POST)
         if form.is_valid():
-            form.save()
+            customer = form.save(commit=False)
+            user = Account.objects.get(pk=user)
+            customer.user = user
+            customer.save()
             context['message'] = 'Client ajouté avec succès'
+            return redirect('account_customer')
         else:
-            cities = City.objects.all()
-            context['cities'] = cities
             context['add_customer_form'] = form
-            print(form.errors)
             
     else:
         form = AddCustomerForm()
-        cities = City.objects.all()
-        context = {"cities":cities,"add_customer_form":form}    
-       
-    return render(request, 'event/add_customer.html',context)
+        context = {"add_customer_form":form}    
+        return render(request, 'event/add_customer.html',context)
 
 @login_required
 def delete_customer_view(request,customerid):
@@ -131,28 +131,22 @@ def delete_customer_view(request,customerid):
 def edit_customer_view(request,customerid):
     """
     """
+    context = {}
     customer = Customer.objects.get(pk=customerid)
     if request.method == 'POST':
-        firstname = request.POST.get("firstname")
-        lastname = request.POST.get("lastname")
-        phone = request.POST.get("phone")
-        company = request.POST.get("company")
-        city_id = request.POST.get("city")
-        street_number = request.POST.get("number")
-        street_name = request.POST.get("streetname")
-        customer.firstname = firstname
-        customer.lastname = lastname
-        customer.phone = phone
-        customer.company = company
-        city = City.objects.get(id=int(city_id))
-        customer.city = city
-        customer.street_number = street_number
-        customer.streetname = street_name
-        customer.save()
-        return redirect('account_customer')
-    cities = City.objects.all()
-    context = {"customer":customer,"cities":cities}
-    return render(request,'event/update_customer_form.html',context)
+        form = AddCustomerForm(request.POST, instance=customer)
+        if form.is_valid():
+            form.save()
+            context['message'] = 'Client édité avec succès'
+            return redirect('account_customer')
+        else:
+            context['update_customer_form'] = form
+    else:
+        customer = Customer.objects.get(pk=customerid)
+        form = AddCustomerForm(instance=customer)
+        
+        context = {"update_customer_form":form,'customer':customer} 
+    return render(request, 'event/update_customer_form.html', context)
 
 @login_required
 def delete_event_view(request,eventid):

@@ -1,13 +1,9 @@
 from django import forms
-from event.models import Evenement,Category,City,Customer
 from account.models import Account
+from event.models import Category, City, Customer, Evenement
 
 
 class AddCustomerForm(forms.ModelForm):
-    
-    phone = forms.CharField(max_length=25, help_text='ce champ est requis',required=True)
-    street_number = forms.CharField(max_length=5,required=True)
-    streetname = forms.CharField(max_length=150,required=True)
     
     class Meta:
         model = Customer
@@ -19,6 +15,15 @@ class AddCustomerForm(forms.ModelForm):
             'street_number',
             'streetname',
             'city',
-            'user',
+
             )
+    
+        
+class AddEventForm(forms.ModelForm):
+    
+    class Meta:
+        model = Evenement
+        fields = '__all__'
+    
+    
         
