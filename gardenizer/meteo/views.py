@@ -20,7 +20,7 @@ def render_week_forecast_view(request):
         weather = CacheManager(city.insee)
         meteo_week = weather.get_meteo_data()
         
-        context = {"meteo_week":meteo_week}
+        context = {"meteo_week":meteo_week,"city":city}
         return render(request, "website/index.html",context)
     context = {"message":message}
     return render(request,"website/index.html",context)

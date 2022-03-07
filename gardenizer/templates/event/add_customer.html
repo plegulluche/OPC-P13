@@ -1,5 +1,5 @@
 {% extends 'website/index.html' %}
-
+{% block meteo %}{% endblock meteo %}
 {% block content %}
 <form action="{% url 'add_customer' %}" method="post">
     {% csrf_token %}
