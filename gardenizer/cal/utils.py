@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 from calendar import HTMLCalendar
 from event.models import Evenement
+from account.models import Account
 
 class Calendar(HTMLCalendar):
     def __init__(self, year=None, month=None):
@@ -29,8 +30,9 @@ class Calendar(HTMLCalendar):
     
     #format a month as a table
     #filter events by year and month
-    def formatmonth(self, withyear=True):
-        events = Evenement.objects.filter(event_start__year=self.year, event_start__month=self.month)
+    def formatmonth(self,userid,withyear=True):
+        user = Account.objects.get(pk=userid)
+        events = Evenement.objects.filter(event_start__year=self.year, event_start__month=self.month,user=user)
         print('Event month :',events)
         print('Month : ',self.month,'Year :',self.year)
         
