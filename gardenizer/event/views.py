@@ -71,46 +71,53 @@ def add_customer_event_view(request):
             context['add_event_form'] = form
             
     else:
-        customers = Customer.objects.all()
+        user = Account.objects.get(pk=request.user.id)
+        customers = Customer.objects.filter(user=user).all()
         form = AddCustomerEventForm()
         context = {"add_event_form":form,'customers':customers}    
         return render(request, 'event/add_customer_event_form.html',context)
     
     
 @login_required
-def update_event_view(request,eventid):
+def update_customer_event_view(request,eventid):
+    context = {}
     event = Evenement.objects.get(pk=eventid)
-    customers = Customer.objects.all()
-
-    if request.method == 'POST':
-        form = form_type(request.POST)
-        if form.is_valid():
-            event = form.save(commit=False)
-            date_start = cstdt(request.POST.get('event_start'))
-            date_end = cstdt(request.POST.get('event_end'))
-            event.event_start = date_start
-            event.event_end = date_end
-            event.save()
-            context['message'] = 'Evènement édité avec succès'
-            return redirect('account_event')
-        else:
-            context['update_event_form'] = form_type
-    if event.category.title == 'Chantier':
-        type = "chantier"
-        start_date_str = cdtstr(event.event_start)
-        end_date_str = cdtstr(event.event_end)
-        form_type = AddCustomerEventForm()
-        context = {"update_event_form":form_type,'event':event,'type':type,'customers':customers,'start':start_date_str,'end':end_date_str}
-        return render(request, 'event/edit_event.html', context)
+    type = "chantier"
+    customers = Customer.objects.filter(user=request.user.id)
+    form = AddCustomerEventForm(request.POST or None,instance=event)
+    message = ''
+    if form.is_valid():
+        event = form.save(commit=False)
+        event.event_start = cstdt(request.POST.get('event_start'))
+        event.event_end = cstdt(request.POST.get('event_end'))
+        event.save()
+        return redirect('success')
     else:
-        type = ""
-        start_date_str = cdtstr(event.event_start)
-        end_date_str = cdtstr(event.event_end)
-        form_type = AddMaintenanceEventForm()
-        context = {"update_event_form":form_type,'event':event,'type':type,'start':start_date_str,'end':end_date_str} 
-        return render(request, 'event/edit_event.html', context)
+        context['form'] = form
+        context['message'] = 'Veuillez remplir tout les champs'
+    context = {'event':event,'form':form,'message':message,'type':type,'customers':customers}
+    return render(request,'event/edit_event.html',context)
 
+@login_required
+def update_maintenance_event_view(request,eventid):
+    context = {}
+    event = Evenement.objects.get(pk=eventid)
+    form = AddMaintenanceEventForm(request.POST or None,instance=event)
+    message = ''
+    if form.is_valid():
+        event = form.save(commit=False)
+        event.event_start = cstdt(request.POST.get('event_start'))
+        event.event_end = cstdt(request.POST.get('event_end'))
+        event.save()
+        return redirect('success')
+    else:
+        context['form'] = form
+        context['message'] = 'Veuillez remplir tout les champs'
+    context = {'event':event,'form':form,'message':message}
+    return render(request,'event/edit_event.html',context)
 
+def render_update_success_page(request):
+    return render(request, 'event/update_success.html')
 
 @login_required
 def delete_event_view(request,eventid):

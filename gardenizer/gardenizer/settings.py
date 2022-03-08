@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'event.apps.EventConfig',
     'website.apps.WebsiteConfig',
     'meteo.apps.MeteoConfig',
+    'cal.apps.CalConfig',
     
 ]
 

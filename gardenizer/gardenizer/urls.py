@@ -22,4 +22,5 @@ urlpatterns = [
     path('', include('website.urls')),
     path('', include('event.urls')),
     path('', include('meteo.urls')),
+    path('',include('cal.urls')),
 ]

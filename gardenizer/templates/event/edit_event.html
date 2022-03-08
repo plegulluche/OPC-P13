@@ -1,19 +1,25 @@
 {% extends 'website/index.html' %}
 {% block meteo %}{% endblock meteo %}
 {% block content %}
+    {% if message %}
+    <div class="alert alert-danger" role="alert">
+        <h2>{{ message }}</h2>
+    </div>
+    {% endif %}
+    
 <form action="" method="post">
     {% csrf_token %}
     <h2>Editer évènement</h2>
     <h3><a href="{% url 'account_event' %}">Retour</a></h3>
-    <p>{{ start }}</p>
+    
     {% if type == 'chantier' %}
     
     <p>TITLE</p>
     <input type="text" name='title' required value={{ event.title }}>
     <p>Date de début (FORMAT : DD/MM/YYYY HH:MM)</p>
-    <input type="text" name="event_start" id="" required value={{ start }}>
+    <input type="datetime-local" name="event_start" id="" required >
     <p>Date de fin (FORMAT : DD/MM/YYYY HH:MM)</p>
-    <input type="text" name="event_end" required value={{ end }}>
+    <input type="datetime-local" name="event_end" required >
     <p>Description</p>
     <textarea name="description" id="" cols="30" rows="10" >{{ event.description }}</textarea><br>
     <p>CLIENT</p>
@@ -27,9 +33,9 @@
     <p>TITLE</p>
     <input type="text" name='title' required value={{ event.title }}>
     <p>Date de début (FORMAT : DD/MM/YYYY HH:MM)</p>
-    <input type="text" name="event_start" id="" help='test' required value={{ start }}>
+    <input type="datetime-local" name="event_start" id="" help='test' required>
     <p>Date de fin (FORMAT : DD/MM/YYYY HH:MM)</p>
-    <input type="text" name="event_end" required value={{ end }}>
+    <input type="datetime-local" name="event_end" required>
     <p>Description</p>
     <textarea name="description" id="" cols="30" rows="10" >{{ event.description }}</textarea><br>
 

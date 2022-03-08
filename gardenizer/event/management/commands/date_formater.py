@@ -3,16 +3,15 @@ from datetime import datetime
 
 def convert_string_to_date_time_object(timestring):
     date_time_str = timestring
-    seconds = ':00'
-    full_date_time_str = date_time_str + seconds
-    datetime_obj = datetime.strptime(full_date_time_str, f'%d/%m/%y %H:%M:%S')
+    date_processing = date_time_str.replace('T', '-').replace(':', '-').split('-')
+    date_processing = [int(v) for v in date_processing]
+    date_out = datetime(*date_processing)
     
-    return datetime_obj
+    return date_out
 
 def convert_date_object_to_string(datetimeobj):
     time_obj = datetimeobj
     timestampstr = time_obj.strftime(f'%d/%m/%y %H:%M:%S')
-    print("def time :" ,timestampstr)
     
     return timestampstr
     
