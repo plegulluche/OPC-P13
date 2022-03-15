@@ -9,4 +9,5 @@ urlpatterns = [
     path("account", views.account_view, name="account"),
     path("account-customer", views.account_customer_view,name="account_customer"),
     path("account-event", views.account_events_view,name="account_event"),
+  
 ]

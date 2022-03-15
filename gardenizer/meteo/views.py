@@ -1,26 +1,27 @@
-from django.shortcuts import render
+from django.http import JsonResponse
 from event.models import City
-from .management.meteo_data_manager import CacheManager
+from .utils.meteo_data_manager import (
+    CacheManager,jsonify_payload
+    )
 
 
-
-def render_week_forecast_view(request):
-    message = "Entrez le nom d'une ville et selectionnez la dans le menu ci-dessous"
-    q = request.GET.get('q')
-    if q:
-        cities = City.objects.filter(name__startswith=q.capitalize())
-        if cities:
-            context = {"cities":cities}
-            return render(request, "website/index.html",context)
-        else:
-            context = {"message":message}
-            return render(request,"website/index.html",context)
+def get_week_forecast_view(request):
+    
     if request.method == 'POST':
-        city = City.objects.get(pk=request.POST.get('city'))
+        city = City.objects.get(name=request.body.decode('utf-8'))
         weather = CacheManager(city.insee)
         meteo_week = weather.get_meteo_data()
+        payload = jsonify_payload(meteo_week)
         
-        context = {"meteo_week":meteo_week,"city":city}
-        return render(request, "website/index.html",context)
-    context = {"message":message}
-    return render(request,"website/index.html",context)
+        return JsonResponse({'status':200,'meteo_week':payload})
+
+def search_city(request):
+    city = request.GET.get('city')
+    payload = []
+    if city:  
+        city_objs = City.objects.filter(name__icontains=city.capitalize())
+        
+        for city_obj in city_objs:
+            payload.append(city_obj.name)
+    return JsonResponse({'status':200,'data':payload})
+        

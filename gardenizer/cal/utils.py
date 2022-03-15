@@ -1,7 +1,10 @@
 from datetime import datetime, timedelta
 from calendar import HTMLCalendar
+
 from event.models import Evenement
 from account.models import Account
+from meteo.models import MeteoData
+
 
 class Calendar(HTMLCalendar):
     def __init__(self, year=None, month=None):
@@ -15,10 +18,10 @@ class Calendar(HTMLCalendar):
         events_per_day = events.filter(event_start__day=day)
         d = ""
         for event in events_per_day:
-            d += f'<li> {event.title} <li>'
+            d += f'<p> {event.title} <p>'
             
         if day != 0:
-            return f'<td><span class="date">{day}</span><ul> {d} </ul></td>'
+            return f'<td><span class="date"><a href="day/{self.month}/{day}">{day}</a></span><ul> {d} </ul></td>'
         return '<td></td>'
     
     #format a week as tr
@@ -32,9 +35,8 @@ class Calendar(HTMLCalendar):
     #filter events by year and month
     def formatmonth(self,userid,withyear=True):
         user = Account.objects.get(pk=userid)
+        meteo = MeteoData.objects.all()
         events = Evenement.objects.filter(event_start__year=self.year, event_start__month=self.month,user=user)
-        print('Event month :',events)
-        print('Month : ',self.month,'Year :',self.year)
         
         cal = f'<table border="0" cellpadding="0" cellspacing="0" class="calendar">\n'
         cal += f'{self.formatmonthname(self.year, self.month, withyear=withyear)}\n'

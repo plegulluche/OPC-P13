@@ -23,6 +23,7 @@ def registration_view(request ,*args, **kwargs):
     
     context = {}
     if request.method == 'POST':
+        print('REQUEST :' , request)
         form = RegisterUserForm(request.POST)
         if form.is_valid():
             form.save()
@@ -86,3 +87,4 @@ def account_events_view(request):
     events = Evenement.objects.filter(user=current_user)
     context = {"events":events}
     return render(request,"account/account_events.html",context)
+

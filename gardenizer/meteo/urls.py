@@ -3,6 +3,6 @@ from . import views
 
 
 urlpatterns = [
-    path('meteo-week',views.render_week_forecast_view,name='weekly_forecast'),
-    
+    path('meteo-week/',views.get_week_forecast_view,name='weekly_forecast'),
+    path('search/',views.search_city,name='search'),
 ]

@@ -1,13 +1,15 @@
-from calendar import calendar, monthrange
+from calendar import monthrange
 from datetime import datetime,timedelta
 from django.shortcuts import render
-from django.http import HttpResponse
 from django.views import generic
 from django.utils.safestring import mark_safe
 
+
+from meteo.utils.meteo_data_manager import get_meteo_and_city_for_an_event
 from .utils import Calendar
 from event.models import Evenement
 from account.models import Account
+
 
 class CalendarView(generic.ListView):
     model = Evenement
@@ -24,6 +26,7 @@ class CalendarView(generic.ListView):
 
         # Call the formatmonth method, which returns our calendar as a table
         userid = self.request.user.id
+        
         html_cal = cal.formatmonth(userid,withyear=True)
         context['calendar'] = mark_safe(html_cal)
         context['prev_month'] = prev_month(d)
@@ -54,3 +57,13 @@ def next_month(d):
     next_month = last + timedelta(days=1)
     month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
     return month
+
+def single_day_view(request,month,day):
+    userid = request.user.id
+    user = Account.objects.get(pk=userid)
+    events_for_day = Evenement.objects.filter(event_start__day=day, event_start__month=month,user=user)
+    meteo_codes = get_meteo_and_city_for_an_event(events_for_day,day,month)
+    print('METEO CODES : ',meteo_codes)
+    context = {'events':events_for_day,'event_meteo':meteo_codes}
+    
+    return render(request,'cal/single_day.html',context)
