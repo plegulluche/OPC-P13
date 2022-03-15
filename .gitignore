@@ -2,6 +2,7 @@
 *.dbm
 *.docx
 *.odt
+*.png
 diagramme package
 diagramme de contexte
 venv
