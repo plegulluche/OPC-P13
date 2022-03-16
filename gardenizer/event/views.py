@@ -1,7 +1,6 @@
-from lib2to3.pytree import convert
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
-from .models import Category,City,Customer,Evenement
+from .models import Category,Customer,Evenement
 from account.models import Account
 from .forms import (
     AddCustomerForm, 
@@ -10,7 +9,6 @@ from .forms import (
 )
 from .management.commands.date_formater import (
     convert_string_to_date_time_object as cstdt,
-    convert_date_object_to_string as cdtstr
 )
 
 
