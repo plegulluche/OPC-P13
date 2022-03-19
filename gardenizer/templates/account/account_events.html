@@ -20,7 +20,11 @@
             <td>{{ event.event_start }}</td>
             <td>{{ event.description }}</td>
             <td>{{ event.category }}</td>
-            <td>{{ event.customer }}</td>
+            {% if event.customer %}
+            <td>{{ event.customer.lastname }}</td>
+            {% else %}
+            <td></td>
+            {% endif %}
             {% if event.category.title == "Chantier" %}
                 <td><a href="{% url 'update_customer_event' event.id %}">Modifier</a></td>
             {% else %}

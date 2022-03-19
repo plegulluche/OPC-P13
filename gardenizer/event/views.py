@@ -7,7 +7,7 @@ from .forms import (
     AddMaintenanceEventForm,
     AddCustomerEventForm
 )
-from .management.commands.date_formater import (
+from .utils import (
     convert_string_to_date_time_object as cstdt,
 )
 
@@ -25,6 +25,7 @@ def add_maintenance_event_view(request):
             event = form.save(commit=False)
             user = Account.objects.get(pk=request.user.id)
             category = Category.objects.get(title='Entretient et révision matériel')
+            print(request.POST.get('event_start'))
             date_start = cstdt(request.POST.get('event_start'))
             date_end = cstdt(request.POST.get('event_end'))
             event.event_start = date_start

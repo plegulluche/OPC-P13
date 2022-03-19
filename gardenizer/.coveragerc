@@ -8,4 +8,5 @@ omit = tests/*
         */admin.py
         */apps.py
         manage.py
+        cal/utils.py
         

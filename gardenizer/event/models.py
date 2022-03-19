@@ -45,7 +45,7 @@ class Customer(models.Model):
         verbose_name_plural = "Customers"
         
     def __str__(self):
-        if self.company is not None:
+        if self.company != "":
             return self.company  
         else:
             return self.lastname + " " + self.firstname
