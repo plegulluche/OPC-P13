@@ -23,7 +23,6 @@ def registration_view(request ,*args, **kwargs):
     
     context = {}
     if request.method == 'POST':
-        print('REQUEST :' , request)
         form = RegisterUserForm(request.POST)
         if form.is_valid():
             form.save()
