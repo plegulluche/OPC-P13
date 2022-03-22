@@ -25,7 +25,6 @@ def add_maintenance_event_view(request):
             event = form.save(commit=False)
             user = Account.objects.get(pk=request.user.id)
             category = Category.objects.get(title='Entretient et révision matériel')
-            print(request.POST.get('event_start'))
             date_start = cstdt(request.POST.get('event_start'))
             date_end = cstdt(request.POST.get('event_end'))
             event.event_start = date_start
@@ -41,7 +40,7 @@ def add_maintenance_event_view(request):
     else:
         form = AddMaintenanceEventForm()
         context = {"add_maintenance_form":form}    
-        return render(request, 'event/add_maintenance_event_form.html',context)
+    return render(request, 'event/add_maintenance_event_form.html',context)
 
 
 @login_required
@@ -74,7 +73,7 @@ def add_customer_event_view(request):
         customers = Customer.objects.filter(user=user).all()
         form = AddCustomerEventForm()
         context = {"add_event_form":form,'customers':customers}    
-        return render(request, 'event/add_customer_event_form.html',context)
+    return render(request, 'event/add_customer_event_form.html',context)
     
     
 @login_required
@@ -141,10 +140,9 @@ def add_customer_view(request):
         form = AddCustomerForm(request.POST)
         if form.is_valid():
             customer = form.save(commit=False)
-            user = Account.objects.get(pk=user)
+            user = Account.objects.get(pk=request.user.id)
             customer.user = user
             customer.save()
-            context['message'] = 'Client ajouté avec succès'
             return redirect('account_customer')
         else:
             context['add_customer_form'] = form
@@ -152,7 +150,7 @@ def add_customer_view(request):
     else:
         form = AddCustomerForm()
         context = {"add_customer_form":form}    
-        return render(request, 'event/add_customer.html',context)
+    return render(request, 'event/add_customer.html',context)
 
 @login_required
 def delete_customer_view(request,customerid):
