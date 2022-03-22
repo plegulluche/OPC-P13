@@ -44,7 +44,7 @@ def jsonify_payload(weather_obj_list):
         }
     return payload
 
-def get_meteo_and_city_for_an_event(events,day,month):
+def get_meteo_and_city_for_an_event(events,day):
     event_images_codes = {}
     for event in events:
         city = event.customer.city.insee

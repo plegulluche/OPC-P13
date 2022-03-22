@@ -59,11 +59,15 @@ def next_month(d):
     return month
 
 def single_day_view(request,month,day):
-    userid = request.user.id
-    user = Account.objects.get(pk=userid)
+    context = {}
+    user = Account.objects.get(pk=request.user.id)
     events_for_day = Evenement.objects.filter(event_start__day=day, event_start__month=month,user=user)
-    meteo_codes = get_meteo_and_city_for_an_event(events_for_day,day,month)
-    print('METEO CODES : ',meteo_codes)
-    context = {'events':events_for_day,'event_meteo':meteo_codes}
-    
+    events_list = []
+    for event in events_for_day:
+        if event.category.title == 'Chantier':
+           events_list.append(event) 
+    meteo_codes = get_meteo_and_city_for_an_event(events_list,day)
+    context['event_meteo']=meteo_codes
+    context['events'] = events_for_day
     return render(request,'cal/single_day.html',context)
+            
