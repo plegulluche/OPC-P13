@@ -379,5 +379,3 @@ def test_response_status_is_200(mocker):
     result = api_caller.get_weekly_forecast(35238)
     meteo = MeteoData.objects.all()
     assert meteo is not None
-    
-    

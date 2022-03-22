@@ -23,11 +23,9 @@ class CacheManager():
     def get_meteo_data(self):
         validator = self._check_if_data_in_db()
         if validator:
-            print('API CALL NOT MADE')
             data = MeteoData.objects.filter(insee=self.insee)
             return data
         else:
-            print('API CALL MADE')
             weather = Weathermanager()
             old_meteo_data = MeteoData.objects.filter(insee=self.insee)
             old_meteo_data.delete()
@@ -50,19 +48,15 @@ def get_meteo_and_city_for_an_event(events,day,month):
     event_images_codes = {}
     for event in events:
         city = event.customer.city.insee
-        print('CITY : ',city)
         get_meteo = CacheManager(city)
         meteo_data = get_meteo.get_meteo_data()
         meteo = MeteoData.objects.filter(datetime__day=day,insee=city)
-        print(meteo)
         if meteo:
             weathercode = meteo[0].weather
-            print('WEATHER CODE : ', weathercode)
             weather_image_code = _transform_weather_code_to_img_code(weathercode)
             link_to_img = f'images/{weather_image_code}.svg'
         else:
             weathercode = 0
-            print('WEATHER CODE : ', weathercode)
             weather_image_code = _transform_weather_code_to_img_code(weathercode)
             link_to_img = f'images/{weather_image_code}.svg'
         event_images_codes[f'{event.id}'] = [event.id,link_to_img]
