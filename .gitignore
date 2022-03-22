@@ -6,4 +6,4 @@
 diagramme package
 diagramme de contexte
 venv
-.env
+*.env
