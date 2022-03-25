@@ -1,13 +1,18 @@
-<hr/>
-<p>METEO 15J</p>
-
+{% load static %}
+<div class="row" style="text-align:center; color:rgb(255,235,205); margin-bottom:60px;">
+    <div class="col">
+        <h1>PREVISIONS METEO POUR LES 15J A VENIR</h1>
+        <h2>(selectionnez une ville pour afficher les prévisions)</h2>
+    </div>    
+</div>
 <form action="{% url 'mainpage' %}" method="post">
     {% csrf_token %}
+    
         <div id="autocomplete" class="autocomplete">
-            <p style='text-align:center;'>search city</p>
-            <input class="autocomplete-input" id='input-text' name='city'/>
-            <ul class="autocomplete-result-list"></ul>
-            
+            <button class='nav-button' style="color:black;" disabled>Chercher une ville</button>
+                    <input class="autocomplete-input" id='input-text' name='city'/>
+                    <ul class="autocomplete-result-list"></ul>  
+                    <button class='nav-button' id="submit" type="submit" style="color:black;">Choisir cette ville</button>
         </div>
-        <button class="btn btn-warning" id="submit" type="submit">Choisir cette ville</button>
+        
 </form> 

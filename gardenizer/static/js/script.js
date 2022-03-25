@@ -48,7 +48,8 @@ const days = ["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"]
 function createMeteoCard(daystr,imagecode,tmin,tmax,cardnumber) {
     let divCard = document.createElement("div");
     divCard.setAttribute('class','card');
-    divCard.innerHTML = `<div class="card-header">${daystr}</div><img src='static/images/${imagecode}.svg'  class="card-img-top"><div class='card-footer'><small class='text-muted'>Min : ${tmin}°/Max : ${tmax}°</small></div>`;
+    divCard.setAttribute('style',"background-color:rgb(255,235,205);")
+    divCard.innerHTML = `<div class="card-header" style="background-image:url('/static/images/bois2.jpg'); text-align: center; color:white;">${daystr}</div><img src='static/images/${imagecode}.svg'  class="card-img-top"><div class='card-footer' style="background-image:url('/static/images/bois2.jpg'); text-align: center; color:white;">Min : ${tmin}°/Max : ${tmax}°</div>`;
     if (cardnumber > 7) {
         secondCardGroupSelector.appendChild(divCard);
     }else {

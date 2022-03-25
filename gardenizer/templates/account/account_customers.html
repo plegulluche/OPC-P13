@@ -1,27 +1,35 @@
 {% extends 'website/index.html' %}
+{% load static %}
 {% block meteo %}{% endblock meteo %}
 {% block content %}
-<h1>Customers list</h1>
-<h2><a href="{% url 'account' %}">Retour a la page de compte</a></h2>
-<p><a href="{% url 'add_customer' %}">Ajouter un client</a></p>
-<table>
+<div class="row" style="text-align:center; color:rgb(255,235,205); margin-bottom:60px;">
+    <div class="col">
+        <h1>MES CLIENTS</h1>
+    </div>    
+</div>
+<div class="navbar-buttons" style="margin-bottom:40px;">
+    <button class='nav-button'><a id='btn-link-nav' href="{% url 'account' %}">Retour a la page de compte</a></button>
+    <button class='nav-button'><a id='btn-link-nav' href="{% url 'add_customer' %}">Ajouter un client</a></button>
+</div>
+<table class="table table-secondary table-striped">
         <tr>
             <td>NOM</td>
             <td>PRENOM</td>
-            <td>numero</td>
-            <td>adresse</td>
-            <td>edition</td>
-            <td>suppression</td>
+            <td>NUMERO</td>
+            <td>ADRESSE</td>
+            <td></td>
+            <td></td>
         </tr>
     {% for customer in customers %}  
         <tr>
-            <td>{{ customer.lastname }}</td>
-            <td>{{ customer.firstname }}</td>
+            <td style="text-transform:uppercase">{{ customer.lastname }}</td>
+            <td style="text-transform:capitalize">{{ customer.firstname }}</td>
             <td>{{ customer.phone }}</td>
             <td>{{ customer.street_number }},{{ customer.streetname }}, {{ customer.city.name }}</td>
-            <td><a href="{% url 'customer_update' customer.pk %}">edit customer</a></td>
-            <td><a href="{% url 'customer_delete' customer.pk %}">delete customer</a></td>
+            <td><a href="{% url 'customer_update' customer.pk %}">Modifier les informations</a></td>
+            <td><a href="{% url 'customer_delete' customer.pk %}">Effacer</a></td>
         </tr> 
     {% endfor %}
 </table>
 {% endblock content %}
+{% block script %}{% endblock script %}

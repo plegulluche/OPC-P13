@@ -43,12 +43,12 @@ const nbStorm = [100,101,102,103,104,105,106,107,108,120,121,122,
 const nbSnow = [20,21,22,60,61,62,63,64,65,66,67,68,70,71,72,73,74,75,76,77,78,142]
 const days = ["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"]
 
-//FUNCTIONS
+//FUNCTIONS}
 
 function createMeteoCard(daystr,imagecode,tmin,tmax,cardnumber) {
     let divCard = document.createElement("div");
     divCard.setAttribute('class','card');
-    divCard.innerHTML = `<div class="card-header">${daystr}</div><img src="\{\% static 'images/${imagecode}.svg' \%\}"  class="card-img-top"><div class='card-footer'><small class='text-muted'>Min : ${tmin}°/Max : ${tmax}°</small></div>`;
+    divCard.innerHTML = `<div class="card-header" style=""background-image:url('/static/images/bois.jpg');"">${daystr}</div><img src='static/images/${imagecode}.svg'  class="card-img-top"><div class='card-footer'><small class='text-muted'>Min : ${tmin}°/Max : ${tmax}°</small></div>`;
     if (cardnumber > 7) {
         secondCardGroupSelector.appendChild(divCard);
     }else {
@@ -91,28 +91,20 @@ function arrayForWeek() {
 function getImgCode(weathercode) {
     console.log(typeof weathercode,weathercode)
     if (nbForCloudy.includes(weathercode)) {
-        console.log("TRUE")
         return 1;
     } else if (nbCloudSun.includes(weathercode)) {
-        console.log("TRUE")
         return 2;
     } else if (nbSunSnow.includes(weathercode)) {
-        console.log("TRUE")
         return 3;
     } else if (nbSunRain.includes(weathercode)) {
-        console.log("TRUE")
         return 4;
     } else if (nbCloudRain.includes(weathercode)) {
-        console.log("TRUE")
         return 5;
     } else if (nbStorm.includes(weathercode)) {
-        console.log("TRUE")
         return 6;
     } else if (nbSnow.includes(weathercode)) {
-        console.log("TRUE")
         return 7;
     } else {
-        console.log("TRUE")
         return 8;
     } 
 }
@@ -154,21 +146,11 @@ function getInput(event) {
             meteo.day12,meteo.day13
             ]
         obj_array.forEach(day => {
-            console.log(typeof day['weather'])
-            console.log(day['weather'])
             let weekArray = arrayForWeek()
-            console.log(weekArray)
             let image = getImgCode(day['weather'])
-            console.log(day['weather'])
             createMeteoCard(weekArray[day['day']],image,day['tmin'],day['tmax'],day['day'])
-            for (let key in day) {
-                console.log(`${key}: ${day[key]}`);
-
             }
-        })
-        
-        
-        
+        ) 
     }).catch(error => {
         console.log(error);
     })

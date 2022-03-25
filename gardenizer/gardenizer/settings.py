@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY','django-insecure-t$Gp5SG!qcAKBAykHGfSCRcsEfKTmhMTA4QhzcXt')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -143,3 +143,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+if DEBUG:
+    MIDDLEWARE = [
+        'whitenoise.middleware.WhiteNoiseMiddleware',
+    ] + MIDDLEWARE
+    INSTALLED_APPS = [
+        'whitenoise.runserver_nostatic',
+    ] + INSTALLED_APPS

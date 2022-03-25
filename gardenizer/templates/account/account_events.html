@@ -1,18 +1,24 @@
 {% extends 'website/index.html' %}
+{% load static %}
 {% block meteo %}{% endblock meteo %}
 {% block content %}
-<h1>Event list</h1>
-
-<h2><a href="{% url 'account' %}">Retour</a></h2>
-<table>
+<div class="row" style="text-align:center; color:rgb(255,235,205); margin-bottom:60px;">
+    <div class="col">
+        <h1>LISTE DES EVENEMENTS</h1>
+    </div>    
+</div>
+<div class="navbar-buttons" style="margin-bottom:40px;">
+    <button class='nav-button'><a id='btn-link-nav' href="{% url 'account' %}">Retour</a></button>
+</div>
+<table class="table table-secondary table-striped">
         <tr>
-            <td>Titre</td>
-            <td>Date de début</td>
-            <td>Description</td>
-            <td>Catégorie</td>
-            <td>Client</td>
-            <td>suppression</td>
-            <td>edition</td>
+            <td>TITRE</td>
+            <td>DATE DE DEBUT</td>
+            <td>DESCRIPTION</td>
+            <td>CATEGORIE</td>
+            <td>CLIENT</td>
+            <td></td>
+            <td></td>
         </tr>
     {% for event in events %}  
         <tr>
@@ -21,7 +27,7 @@
             <td>{{ event.description }}</td>
             <td>{{ event.category }}</td>
             {% if event.customer %}
-            <td>{{ event.customer.lastname }}</td>
+            <td style="text-transform:uppercase">{{ event.customer.lastname }}  {{ event.customer.firstname }}</td>
             {% else %}
             <td></td>
             {% endif %}
@@ -35,3 +41,4 @@
     {% endfor %}
 </table>
 {% endblock content %}
+{% block script %}{% endblock script %}

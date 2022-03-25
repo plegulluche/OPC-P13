@@ -1,0 +1,34 @@
+{% extends 'website/index.html' %}
+{% load static %}
+{% block background %}
+    <body style="background-image:url('{% static "images/bois2.jpg" %}');">
+{% endblock background %}
+
+{% block content %}
+<section style="background-image:url('{% static "images/bois2.jpg" %}');">
+    {% block meteo %}
+        {% include 'website/snippets/meteo_selector.html' %}   
+        {% include 'website/snippets/display_meteo.html' %}
+    {% endblock meteo %}
+</section class="home-section">
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card" style="width: 20rem; background-color: rgb(176, 209, 143); text-align: center;">
+            <div class="card-body">
+                <h2 class="card-title">Why do we use it?</h2>
+                <p class="card-text">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+            </div>
+        </div>
+    </div> 
+    <div class="col-sm-6">   
+        <div class="card border-success mb-3" style="max-width: 18rem;">
+            <div class="card-header bg-transparent border-success" style="background-image:url('{% static "images/bois2.jpg" %}');">Header</div>
+            <div class="card-body text-success" style="background-image:url('/static/images/bois3.jpg');">
+              <h5 class="card-title">Success card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+            <div class="card-footer bg-transparent border-success">Footer</div>
+          </div>
+    </div>     
+</div> 
+{% endblock content %}

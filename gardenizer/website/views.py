@@ -4,4 +4,4 @@ from event.models import City
 
 def mainpage(request):
 
-    return render(request, "website/index.html")
+    return render(request, "website/mainpage.html")

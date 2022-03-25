@@ -1,14 +1,30 @@
 {% extends 'website/index.html' %}
+{% load static %}
 {% block meteo %}{% endblock meteo %}
 {% block content %}
+<div class="row" style="text-align:center; color:rgb(255,235,205); margin-bottom:60px;">
+    <div class="col">
+        <h1>PAGE DE COMPTE</h1>
+    </div>    
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card text-center" style="background-color:rgb(255,235,205);">
+            <h2>Evenements</h2>
+            <p><a href="{% url "add_customer_event" %}">Ajouter un chantier client</a></p>
+            <p><a href="{% url "add_maintenance_event" %}">Ajouter une tache d'entretrient</a></p>
+            <p><a href="{% url "account_event" %}">liste des evenements(edition et suppression)</a></p>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card text-center" style="background-color:rgb(255,235,205);">
+            <h2>Clients</h2>
+            <p><a href="{% url 'account_customer' %}">Ajouter ou editer des clients</a></p>
+        </div>
+    </div>      
+</div>
 
-<h1>PAGE DE COMPTE</h1>
-<h2>Evenements</h2>
-<p><a href="{% url "add_customer_event" %}">Ajouter un chantier client</a></p>
-<p><a href="{% url "add_maintenance_event" %}">Ajouter une tache d'entretrient</a></p>
-<p><a href="{% url "account_event" %}">liste des evenements(edition et suppression)</a></p>
 
-<h2>Clients</h2>
-<p><a href="{% url 'account_customer' %}">Ajouter ou editer des clients</a></p>
-    
+
 {% endblock content %}
+{% block script %}{% endblock script %}

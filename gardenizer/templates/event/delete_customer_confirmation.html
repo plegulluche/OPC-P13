@@ -1,13 +1,17 @@
 {% extends 'website/index.html' %}
 {% block meteo %}{% endblock meteo %}
 {% block content %}
-<div>
-    <p>Etes vous sur de vouloir supprimer ce client ? </p>
+
+<div class="row" style="text-align:center; color:rgb(255,235,205); margin-bottom:60px; margin-top:60px;">
+    <div class="col">
+        <h1>Etes vous sur de vouloir supprimer ce client ? </h1>
+    </div>    
+</div>
+<div class="navbar-buttons" style="margin-bottom:40px;">
     <form action="" method="post">
         <input type="submit" value="oui">
         {% csrf_token %}
     </form>
-    <button type="button"><a href="{% url 'account_customer' %}">Non</a></button>
+    <button class='nav-button'><a id='btn-link-nav' href="{% url 'account' %}">Non</a></button>
 </div>
-
 {% endblock content %}
