@@ -1,3 +1,5 @@
+*/__pycache__
+__pycache__
 *.pdf
 *.dbm
 *.docx
@@ -6,4 +8,5 @@
 diagramme package
 diagramme de contexte
 venv
+*staticfiles
 *.env

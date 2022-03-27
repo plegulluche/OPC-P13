@@ -35,7 +35,7 @@ class Customer(models.Model):
     lastname = models.CharField(max_length=100, default="",null=True,blank=True)
     phone = models.CharField(max_length=25)
     company = models.CharField(max_length=150, default="",null=True,blank=True)
-    street_number = models.CharField(max_length=5)
+    street_number = models.CharField(max_length=10)
     streetname = models.CharField(max_length=200)
     city = models.ForeignKey(City, on_delete=models.PROTECT,default=1)
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
