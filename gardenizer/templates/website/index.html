@@ -57,16 +57,16 @@
     </nav>
 </header>
 
-
 {% block content %}
        
 {% endblock %}
-{% comment %} <div class="container-fluid fixed-bottom" style="background-image:url('{% static "images/terreau.jpg" %}'); height:80px; margin-top:50px;">
-    <div class="row align-items-center text-center">
-        <div class="col-6 col-sm-6 "><a href="" class="text-decoration-none" style="color: #ffffff;">Mentions légales</a></div>
-        <div class="col-6 col-sm-6 "><a href=""  class="text-decoration-none" style="color: #ffffff;">Contacts</a></div>
-    </div>
-</div> {% endcomment %}
+
+<div class="container-fluid" style="background-image:url('{% static "images/terreau.jpg" %}'); height:80px; margin-top:50px;">  
+        <div class="navbar-buttons">
+            <button class='nav-button' style='margin: 20px;'><a href="" class="text-decoration-none">Mentions légales</a></button>
+            <button class='nav-button' style='margin: 20px;'><a href="" class="text-decoration-none">À propos</a></button>
+        </div>
+</div>
 
         <script 
             src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js" 
