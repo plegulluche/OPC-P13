@@ -18,8 +18,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" 
     integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/website/style.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/cal/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/website/style.css' %}?{% now "U" %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/cal/styles.css' %}?{% now "U" %}">
     {% block style %}
     {% endblock style %}
 </head>
@@ -49,8 +49,8 @@
                 <img src="{% static "images/round-tree-logo.jpg" %}" alt="">
             </div>
             <div>
-            <li class='nav-item'><a href="{% url 'login' %}">LOGIN</a></li>
-            <li class='nav-item'><a href="{% url 'register' %}">REGISTER</a></li>
+                <button class='nav-button'><a href="{% url 'login' %}">Se connecter</a></button>
+                <button class='nav-button'><a href="{% url 'register' %}">Créer un compte</a></button>
             </div>
         </ul>
         {% endif %}
@@ -59,7 +59,7 @@
 
 
 {% block content %}
-            
+       
 {% endblock %}
 {% comment %} <div class="container-fluid fixed-bottom" style="background-image:url('{% static "images/terreau.jpg" %}'); height:80px; margin-top:50px;">
     <div class="row align-items-center text-center">

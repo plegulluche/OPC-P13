@@ -1,15 +1,18 @@
 {% extends 'website/index.html' %}
 {% load static %}
+{% block meteo %}{% endblock meteo %}
+{% block background %}
+<body style="background-image:url('{% static "images/bois3.jpg" %}');">
+{% endblock background %}
 
-{% block meteo %}
-{% endblock meteo %}
 {% block content %}
 
 <div class="navbar-buttons">
 	<button class='nav-button'><a href="{% url 'calendar' %}?{{ prev_month }}"> Previous Month </a></button>
 	<button class='nav-button'><a href="{% url 'calendar' %}?{{ next_month }}"> Next Month </a></button>
 </div>
+<div class="cal-container" style="padding:30px; color:white;">
 {{ calendar }}
-
+</div>
 {% endblock content %}
 {% block scripts %}{% endblock scripts %}

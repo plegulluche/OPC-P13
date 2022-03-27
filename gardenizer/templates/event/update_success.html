@@ -1,8 +1,14 @@
 {% extends 'website/index.html' %}
 {% block meteo %}{% endblock meteo %}
 {% block content %}
+<div class="row" style="text-align:center; color:rgb(255,235,205); margin-bottom:60px;">
+    <div class="col">
+        <h1>Evenement édité avec succès</h1>
+    </div>    
+</div>
+<div class="navbar-buttons" style="margin-bottom:40px;">
+    <button class='nav-button'><a id='btn-link-nav' href="{% url 'account_event' %}">Retour a liste des évènements</a></button>
+</div>
 
-    <p>Evenement édité avec succès</p>
-    <p><a href="{% url 'account_event' %}">Retour a liste des évènements</a></p>
 {% endblock content %}
-
+{% block script %}{% endblock script %}

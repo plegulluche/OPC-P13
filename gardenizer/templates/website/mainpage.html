@@ -5,30 +5,59 @@
 {% endblock background %}
 
 {% block content %}
+{% if request.user.is_authenticated %}
 <section style="background-image:url('{% static "images/bois2.jpg" %}');">
     {% block meteo %}
         {% include 'website/snippets/meteo_selector.html' %}   
         {% include 'website/snippets/display_meteo.html' %}
     {% endblock meteo %}
-</section class="home-section">
-<div class="row">
-    <div class="col-sm-6">
-        <div class="card" style="width: 20rem; background-color: rgb(176, 209, 143); text-align: center;">
-            <div class="card-body">
-                <h2 class="card-title">Why do we use it?</h2>
-                <p class="card-text">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
-            </div>
-        </div>
-    </div> 
-    <div class="col-sm-6">   
-        <div class="card border-success mb-3" style="max-width: 18rem;">
-            <div class="card-header bg-transparent border-success" style="background-image:url('{% static "images/bois2.jpg" %}');">Header</div>
-            <div class="card-body text-success" style="background-image:url('/static/images/bois3.jpg');">
-              <h5 class="card-title">Success card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-            <div class="card-footer bg-transparent border-success">Footer</div>
+</section> 
+<div class="card bg-secondary text-white text-center">
+  <img src="{% static "images/jardin1.jpg" %}" class="card-img" alt="...">
+  <div class="card-img-overlay">
+      <div class="card-header">
+          <h5 class="card-title">Gardenizer , l'organisateur simple et efficace</h5>
+      </div>
+  </div>
+</div>
+{% else %} 
+<div class="row gx-4 gx-lg-5 h-100 align-items-top justify-content-center text-center">
+    <div class="card mb-3" style="max-width: 540px; background-color:antiquewhite;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{% static "images/jardin3.jpg" %}" class="img-fluid rounded-start" alt="...">
           </div>
-    </div>     
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Bienvenue</h5>
+              <p class="card-text">Merci de créer un compte et vous identifier pour pouvoir jouir pleinement de toutes les fonctionnalités du site.</p>
+            </div>
+          </div>
+        </div>
+      </div>
 </div> 
+<div class="card bg-secondary text-white text-center">
+    <img src="{% static "images/jardin1.jpg" %}" class="card-img" alt="...">
+    <div class="card-img-overlay">
+        <div class="card-header">
+            <h5 class="card-title">Gardenizer , l'organisateur simple et efficace</h5>
+        </div>
+        <div class="card-body">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima similique asperiores qui expedita ratione necessitatibus quos, illo debitis corporis, repudiandae iure tenetur, odit unde natus accusantium! Soluta expedita repellat labore.</p>
+            <br>
+            <br>
+            <br>
+        </div>
+        <div class="card-footer text-muted">
+            <p class="card-text">Last updated 27/03/2022</p>
+         </div>
+    </div>
+</div>
+{% endif %}   
+
 {% endblock content %}

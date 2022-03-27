@@ -2,10 +2,12 @@
 {% load static %}
 {% block meteo %}{% endblock meteo %}
 {% block content %}
-<header class="masthead">
-	<div class="container-fluid px-4 px-lg-5 h-100" id="registration">
-		<div class="row gx-4 gx-lg-5 h-100 align-items-top justify-content-center text-center">
-			<h2>Login</h2>
+<div class="row" style="text-align:center; color:rgb(255,235,205); margin-bottom:60px;">
+    <div class="col">
+        <h1>Se connecter</h1>
+    </div>    
+</div>
+<div class="row gx-4 gx-lg-5 h-100 align-items-top justify-content-center text-center">
 			<form action="{% url 'login' %}" method="post">
                 {% csrf_token %}
                 <br>
@@ -13,7 +15,7 @@
 				<br>
                 <input type="password" placeholder="Password" name="password" required>
 				<br>
-                <a href="">Forgot your password?</a>
+                <button class='nav-button' style="color:black;" disabled><a href="">Mot de passe oublié?(à venir)</a></button>
 				<br>
 				{% for field in login_form %}
 				<p>
@@ -28,11 +30,10 @@
 				</div>
 
 				{% endif %}
-                <button type="submit" name="signin">Sign In</button>
+                <button class='nav-button' type="submit" name="signin" style="color:black;">S'identifier</button>
             </form>
-		</div>
-	</div>
-</header>
+</div>
+
 
 {% endblock %}
 {% block script %}
