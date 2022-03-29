@@ -35,12 +35,12 @@
             </div>
             <div class="buttons-navbar">
                 <button class='nav-button' disabled style="color:black;">Connecté en tant que :  <p class="user-header">{{request.user.username}} ({{ request.user.email }})</p> </button>
-                <button class='nav-button'><a href="{% url 'logout' %}">Se déconnecter</a></button>
-                <button class='nav-button'><a href="{% url 'account' %}">Mon compte</a></button>
+                <button class='nav-button' id="logout"><a href="{% url 'logout' %}">Se déconnecter</a></button>
+                <button class='nav-button' id="account"><a href="{% url 'account' %}">Mon compte</a></button>
             </div>  
         </ul>
         <div class="navbar-buttons">
-            <button class='nav-button'><a id='btn-link-nav' href="{% url 'calendar' %}">Calendrier</a></button>
+            <button class='nav-button' id="calendar"><a id='btn-link-nav' href="{% url 'calendar' %}">Calendrier</a></button>
             <button class='nav-button'><a id='btn-link-nav' href="{% url 'mainpage' %}">Retour a l acceuil</a></button>
         </div>
         {% else %}
@@ -49,8 +49,9 @@
                 <img src="{% static "images/round-tree-logo.jpg" %}" alt="">
             </div>
             <div>
-                <button class='nav-button'><a href="{% url 'login' %}">Se connecter</a></button>
+                <button class='nav-button' id="login"><a href="{% url 'login' %}">Se connecter</a></button>
                 <button class='nav-button'><a href="{% url 'register' %}">Créer un compte</a></button>
+                <button class='nav-button'><a id='btn-link-nav' href="{% url 'mainpage' %}">Retour a l acceuil</a></button>
             </div>
         </ul>
         {% endif %}
