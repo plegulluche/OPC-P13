@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
-from .models import Category,Customer,Evenement
+from .models import Category, City,Customer,Evenement
 from account.models import Account
 from .forms import (
     AddCustomerForm, 
@@ -134,6 +134,7 @@ def add_customer_view(request):
     """
     View creating new customer from post data of a creation form
     """
+    cities = City.objects.all()
     context = {}
     
     if request.method == 'POST':
@@ -149,7 +150,7 @@ def add_customer_view(request):
             
     else:
         form = AddCustomerForm()
-        context = {"add_customer_form":form}    
+        context = {"add_customer_form":form ,"cities":cities}    
     return render(request, 'event/add_customer.html',context)
 
 @login_required

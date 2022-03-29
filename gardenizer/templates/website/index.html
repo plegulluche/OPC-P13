@@ -19,7 +19,7 @@
     integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/website/style.css' %}?{% now "U" %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/cal/styles.css' %}?{% now "U" %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/cal/style.css' %}?{% now "U" %}">
     {% block style %}
     {% endblock style %}
 </head>
@@ -33,8 +33,8 @@
             <div class="logo-navbar">
                 <img src="{% static "images/round-tree-logo.jpg" %}" alt="">
             </div>
-            <div>
-                <button class='nav-button' disabled style="color:black;">Connecté en tant que :  {{request.user.username}} </button>
+            <div class="buttons-navbar">
+                <button class='nav-button' disabled style="color:black;">Connecté en tant que :  <p class="user-header">{{request.user.username}} ({{ request.user.email }})</p> </button>
                 <button class='nav-button'><a href="{% url 'logout' %}">Se déconnecter</a></button>
                 <button class='nav-button'><a href="{% url 'account' %}">Mon compte</a></button>
             </div>  
@@ -56,18 +56,15 @@
         {% endif %}
     </nav>
 </header>
-
+<main>
 {% block content %}
        
 {% endblock %}
-
-<div class="container-fluid" style="background-image:url('{% static "images/terreau.jpg" %}'); height:80px; margin-top:50px;">  
-        <div class="navbar-buttons">
-            <button class='nav-button' style='margin: 20px;'><a href="" class="text-decoration-none">Mentions légales</a></button>
-            <button class='nav-button' style='margin: 20px;'><a href="" class="text-decoration-none">À propos</a></button>
-        </div>
-</div>
-
+</main>
+<footer style="background-image:url('{% static "images/terreau.jpg" %}');">      
+            <button class='nav-button' style='margin: 20px;'><a href="{% url 'legals' %}" class="text-decoration-none">Mentions légales</a></button>
+            <button class='nav-button' style='margin: 20px;'><a href="{% url 'about' %}" class="text-decoration-none">À propos</a></button>
+</footer>
         <script 
             src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js" 
             integrity="sha512-wT7uPE7tOP6w4o28u1DN775jYjHQApdBnib5Pho4RB0Pgd9y7eSkAV1BTqQydupYDB9GBhTcQQzyNMPMV3cAew==" 

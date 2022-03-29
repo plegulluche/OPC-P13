@@ -1,7 +1,23 @@
 {% extends 'website/index.html' %}
 {% load static %}
 {% block content %}
-<p>card with content goes here</p>
-
+<section class="legals-card-container">
+    <div class="card text-center" style="widht: 10rem;">
+        <div class="card-header">
+            <br>
+        </div>
+        <div class="card-body bg-dark">
+            <h5 class="card-title text-light">Mentions légales et informations de contact</h5>
+            <p class="card-text text-light">@ 2022 Copyright</p>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    Les données météo sont fournies grâce au site : https://api.meteo-concept.com/
+                </li>
+                <li class="list-group-item">Site hébérgé par DigitalOcean, LLC. All rights reserved.</li>
+                <li class="list-group-item">Un problème a reporter ? contactez le webmaster a cette adresse : pprolg85@gmail.com</li>
+            </ul>
+        </div>
+    </div>
+</section>  
 {% endblock content %}
 {% block script %}{% endblock script %}

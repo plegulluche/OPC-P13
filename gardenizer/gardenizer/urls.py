@@ -24,3 +24,5 @@ urlpatterns = [
     path('', include('meteo.urls')),
     path('',include('cal.urls')),
 ]
+
+handler404 = "website.views.handle_not_found"

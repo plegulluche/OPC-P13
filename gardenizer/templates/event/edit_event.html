@@ -21,15 +21,15 @@
     {% csrf_token %}
     {% if type == 'chantier' %}
     
-    <p style="color:antiquewhite;"><strong>TITRE</strong></p>
+    <p><strong>TITRE</strong></p>
     <input type="text" name='title' required value={{ event.title }}>
-    <p style="color:antiquewhite;"><strong>Date de début (FORMAT : DD/MM/YYYY HH:MM)</strong></p>
+    <p><strong>Date de début (FORMAT : DD/MM/YYYY HH:MM)</strong></p>
     <input type="datetime-local" name="event_start" id="" required >
-    <p style="color:antiquewhite;"><strong>Date de fin (FORMAT : DD/MM/YYYY HH:MM)</strong></p>
+    <p><strong>Date de fin (FORMAT : DD/MM/YYYY HH:MM)</strong></p>
     <input type="datetime-local" name="event_end" required >
-    <p style="color:antiquewhite;"><strong>DESCRIPTION</strong></p>
+    <p><strong>DESCRIPTION</strong></p>
     <textarea name="description" id="" cols="30" rows="10" >{{ event.description }}</textarea><br>
-    <p style="color:antiquewhite;"><strong>CLIENT</strong></p>
+    <p><strong>CLIENT</strong></p>
     <p>
         <select name="customer" id="" value={{ event.customer.lastname }}>
             {% for customer in customers %}

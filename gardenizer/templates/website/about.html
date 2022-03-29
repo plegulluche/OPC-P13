@@ -1,7 +1,54 @@
 {% extends 'website/index.html' %}
 {% load static %}
 {% block content %}
-<p>card with content goes here</p>
+<div class="card bg-secondary text-white text-center">
+    <img src="{% static "images/jardin2.jpg" %}" class="card-img" alt="...">
+    <div class="card-img-overlay">
+        <div class="card-header">
+            <h5 class="card-title">À propos</h5>
+            <h3 class"version-title">VERSIONS</h3>
+            <p class="release-p">L'application est en version 1.0 actuellement et est toujours en cours de dévellopement.
+                Le délai prévu pour chaque nouvelle version devrai être de quelques semaines.
+                Ce planning de release est a titre informatif et peut etre amené a subir des changements au cours du dévellopement.
+                Voici une liste des futures releases et de leur contenu:
+                <table class="table-light table striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Version</th>
+                        <th scope="col">Notes de version</th>
+                        <th scope="col">Date prévue</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">v1.0.1</th>
+                        <td>Ajout d'une fonctionnalité de récupération de mot de passe via email ainsi que la possiblité de réinitialiser sont mot de passe depuis l'application (nécéssite de connaître son ancien mot de passe).</td>
+                        <td>Avril 2022</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">v1.0.2</th>
+                        <td>Optimisation des formulaires (champs de recherche de villes et de clients).
+                            Optimisation de la navigation sur le site.
+                        </td>
+                        <td>Avril 2022</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">v1.1.0</th>
+                        <td>Optimisation de l'affichage météo et ajout de plus d'informations météo (heure par heure par ville)</td>
+                        <td>Mai 2022</td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </p>
+            <p class="how-to-p">
+                <h3>USAGE</h3>
+                (En construction)
+
+
+            </p>
+        </div>
+    </div>
+</div>
 
 {% endblock content %}
 {% block script %}{% endblock script %}

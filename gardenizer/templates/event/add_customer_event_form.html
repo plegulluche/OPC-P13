@@ -18,15 +18,15 @@
     </div>
     {% endif %}
     
-    <p style="color:white;">TITRE</p>
+    <p>TITRE</p>
     <input type="text" name='title' required>
-    <p style="color:white;">Date de début (FORMAT : DD/MM/YYYY HH:MM)</p>
+    <p>Date de début (FORMAT : DD/MM/YYYY HH:MM)</p>
     <input type="datetime-local" name="event_start" id="" help='test' required>
-    <p style="color:white;">Date de fin (FORMAT : DD/MM/YYYY HH:MM)</p>
+    <p>Date de fin (FORMAT : DD/MM/YYYY HH:MM)</p>
     <input type="datetime-local" name="event_end" required>
-    <p style="color:white;">DESCRIPTION</p>
+    <p>DESCRIPTION</p>
     <textarea name="description" id="" cols="30" rows="10"></textarea><br>
-    <p style="color:white;">CLIENT</p>
+    <p>CLIENT</p>
     <p>
         <select name="customer" id="">
             {% for customer in customers %}

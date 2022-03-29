@@ -1,6 +1,6 @@
-//AUTOCOMPLETE FUNCTION WITH AUTOCOMPLETE-JS LIBRARY
+//AUTOCOMPLETE FUNCTION WITH AUTOCOMPLETE-JS LIBRARY FOR METEO APP
 new Autocomplete('#autocomplete', {
-
+                
                 search : input =>{
                     const url = `/search/?city=${input}`
                     return new Promise((resolve,reject) =>{
@@ -15,6 +15,8 @@ new Autocomplete('#autocomplete', {
                     })
                 }
             })
+
+
 
 //SELECTORS
 const inputField = document.querySelector('#input-text');
@@ -50,7 +52,7 @@ function createMeteoCard(daystr,imagecode,tmin,tmax,cardnumber) {
     divCard.setAttribute('class','card');
     divCard.setAttribute('style',"background-color:rgb(255,235,205);")
     divCard.innerHTML = `<div class="card-header" style="background-image:url('/static/images/bois2.jpg'); text-align: center; color:white;">${daystr}</div><img src='static/images/${imagecode}.svg'  class="card-img-top"><div class='card-footer' style="background-image:url('/static/images/bois2.jpg'); text-align: center; color:white;">Min : ${tmin}°/Max : ${tmax}°</div>`;
-    if (cardnumber > 7) {
+    if (cardnumber > 6) {
         secondCardGroupSelector.appendChild(divCard);
     }else {
         firstCardGroupSelector.appendChild(divCard);
