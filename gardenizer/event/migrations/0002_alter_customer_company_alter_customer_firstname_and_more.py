@@ -7,43 +7,48 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('event', '0001_initial'),
+        ("event", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='customer',
-            name='company',
-            field=models.CharField(blank=True, default='', max_length=150, null=True),
+            model_name="customer",
+            name="company",
+            field=models.CharField(blank=True, default="", max_length=150, null=True),
         ),
         migrations.AlterField(
-            model_name='customer',
-            name='firstname',
-            field=models.CharField(blank=True, default='', max_length=100, null=True),
+            model_name="customer",
+            name="firstname",
+            field=models.CharField(blank=True, default="", max_length=100, null=True),
         ),
         migrations.AlterField(
-            model_name='customer',
-            name='lastname',
-            field=models.CharField(blank=True, default='', max_length=100, null=True),
+            model_name="customer",
+            name="lastname",
+            field=models.CharField(blank=True, default="", max_length=100, null=True),
         ),
         migrations.AlterField(
-            model_name='evenement',
-            name='all_day',
+            model_name="evenement",
+            name="all_day",
             field=models.BooleanField(default=False, null=True),
         ),
         migrations.AlterField(
-            model_name='evenement',
-            name='customer',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='event.customer'),
+            model_name="evenement",
+            name="customer",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="event.customer",
+            ),
         ),
         migrations.AlterField(
-            model_name='evenement',
-            name='description',
-            field=models.TextField(blank=True, default='', null=True),
+            model_name="evenement",
+            name="description",
+            field=models.TextField(blank=True, default="", null=True),
         ),
         migrations.AlterField(
-            model_name='evenement',
-            name='event_end',
+            model_name="evenement",
+            name="event_end",
             field=models.DateTimeField(blank=True, null=True),
         ),
     ]

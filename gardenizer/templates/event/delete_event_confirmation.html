@@ -9,7 +9,9 @@
 </div>
 <div class="navbar-buttons" style="margin-bottom:40px;">
     <form action="" method="post">
+        <button class='nav-button'>
         <input type="submit" value="oui">
+        </button>
         {% csrf_token %}
     </form>
     <button class='nav-button'><a id='btn-link-nav' href="{% url 'account' %}">Non</a></button>

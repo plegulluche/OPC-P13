@@ -7,26 +7,33 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='MeteoData',
+            name="MeteoData",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('day', models.IntegerField()),
-                ('weather', models.IntegerField()),
-                ('tmin', models.IntegerField()),
-                ('tmax', models.IntegerField()),
-                ('probarain', models.IntegerField()),
-                ('probafrost', models.IntegerField()),
-                ('probawind', models.IntegerField()),
-                ('insee', models.CharField(max_length=10)),
-                ('datetime', models.DateTimeField()),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("day", models.IntegerField()),
+                ("weather", models.IntegerField()),
+                ("tmin", models.IntegerField()),
+                ("tmax", models.IntegerField()),
+                ("probarain", models.IntegerField()),
+                ("probafrost", models.IntegerField()),
+                ("probawind", models.IntegerField()),
+                ("insee", models.CharField(max_length=10)),
+                ("datetime", models.DateTimeField()),
             ],
             options={
-                'verbose_name': 'Meteo',
+                "verbose_name": "Meteo",
             },
         ),
     ]

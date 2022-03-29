@@ -15,7 +15,7 @@ def test_meteo_model():
         probafrost=2,
         probawind=2,
         insee="12345",
-        datetime='2022-03-05 01:00:00+01'
+        datetime="2022-03-05 01:00:00+01",
     )
 
     expected_value = "12345"

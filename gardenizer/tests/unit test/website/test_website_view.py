@@ -4,23 +4,27 @@ from pytest_django.asserts import assertTemplateUsed
 
 CLIENT = Client()
 
+
 def test_mainpage_view():
-    response = CLIENT.get(reverse('mainpage'))
+    response = CLIENT.get(reverse("mainpage"))
     assert response.status_code == 200
-    assertTemplateUsed(response,'website/mainpage.html')
-    
+    assertTemplateUsed(response, "website/mainpage.html")
+
+
 def test_legals_page_view():
-    response = CLIENT.get(reverse('legals'))
+    response = CLIENT.get(reverse("legals"))
     assert response.status_code == 200
-    assertTemplateUsed(response,'website/legals.html')
-    
+    assertTemplateUsed(response, "website/legals.html")
+
+
 def test_about_page_view():
-    response = CLIENT.get(reverse('about'))
+    response = CLIENT.get(reverse("about"))
     assert response.status_code == 200
-    assertTemplateUsed(response,'website/about.html')
-    
+    assertTemplateUsed(response, "website/about.html")
+
+
 def test_404_page():
     path = "/legals/ffsef/"
     request = CLIENT.get(path)
     assert request.status_code == 200
-    assertTemplateUsed(request,'website/not-found.html')
+    assertTemplateUsed(request, "website/not-found.html")

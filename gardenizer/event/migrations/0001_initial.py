@@ -15,65 +15,132 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Category',
+            name="Category",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=100)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=100)),
             ],
             options={
-                'verbose_name': 'Category',
-                'verbose_name_plural': 'Categories',
+                "verbose_name": "Category",
+                "verbose_name_plural": "Categories",
             },
         ),
         migrations.CreateModel(
-            name='City',
+            name="City",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200)),
-                ('zipcode', models.CharField(max_length=20)),
-                ('latitude', models.DecimalField(decimal_places=6, default=0, max_digits=12)),
-                ('longitude', models.DecimalField(decimal_places=6, default=0, max_digits=12)),
-                ('insee', models.CharField(max_length=20)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=200)),
+                ("zipcode", models.CharField(max_length=20)),
+                (
+                    "latitude",
+                    models.DecimalField(decimal_places=6, default=0, max_digits=12),
+                ),
+                (
+                    "longitude",
+                    models.DecimalField(decimal_places=6, default=0, max_digits=12),
+                ),
+                ("insee", models.CharField(max_length=20)),
             ],
             options={
-                'verbose_name': 'City',
-                'verbose_name_plural': 'Cities',
+                "verbose_name": "City",
+                "verbose_name_plural": "Cities",
             },
         ),
         migrations.CreateModel(
-            name='Customer',
+            name="Customer",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('firstname', models.CharField(default='', max_length=100)),
-                ('lastname', models.CharField(default='', max_length=100)),
-                ('phone', models.CharField(max_length=25)),
-                ('company', models.CharField(default='', max_length=150)),
-                ('street_number', models.CharField(max_length=5)),
-                ('streetname', models.CharField(max_length=200)),
-                ('city', models.ForeignKey(default=1, on_delete=django.db.models.deletion.PROTECT, to='event.city')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("firstname", models.CharField(default="", max_length=100)),
+                ("lastname", models.CharField(default="", max_length=100)),
+                ("phone", models.CharField(max_length=25)),
+                ("company", models.CharField(default="", max_length=150)),
+                ("street_number", models.CharField(max_length=5)),
+                ("streetname", models.CharField(max_length=200)),
+                (
+                    "city",
+                    models.ForeignKey(
+                        default=1,
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to="event.city",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Customer',
-                'verbose_name_plural': 'Customers',
+                "verbose_name": "Customer",
+                "verbose_name_plural": "Customers",
             },
         ),
         migrations.CreateModel(
-            name='Evenement',
+            name="Evenement",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=150, unique=True)),
-                ('event_start', models.DateTimeField()),
-                ('event_end', models.DateTimeField()),
-                ('all_day', models.BooleanField(default=False)),
-                ('description', models.TextField()),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='event.category')),
-                ('customer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='event.customer')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=150, unique=True)),
+                ("event_start", models.DateTimeField()),
+                ("event_end", models.DateTimeField()),
+                ("all_day", models.BooleanField(default=False)),
+                ("description", models.TextField()),
+                (
+                    "category",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT, to="event.category"
+                    ),
+                ),
+                (
+                    "customer",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="event.customer"
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Event',
-                'verbose_name_plural': 'Events',
+                "verbose_name": "Event",
+                "verbose_name_plural": "Events",
             },
         ),
     ]

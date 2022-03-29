@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import BaseUserManager,AbstractBaseUser
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+
 
 class MyAccountManager(BaseUserManager):
     def create_user(self, email, username, password=None):
@@ -40,7 +41,6 @@ class Account(AbstractBaseUser):
     is_active = models.BooleanField(verbose_name="is active", default=True)
     is_staff = models.BooleanField(verbose_name="is staff", default=False)
     is_superuser = models.BooleanField(verbose_name="is super", default=False)
-
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = [

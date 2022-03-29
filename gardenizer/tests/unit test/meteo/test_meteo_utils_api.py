@@ -13,7 +13,7 @@ def mock_requestget(*args, **kwargs):
             "name": "Rennes",
             "latitude": 48.112,
             "longitude": -1.6819,
-            "altitude": 38
+            "altitude": 38,
         },
         "update": "2022-03-22T11:14:54+01:00",
         "forecast": [
@@ -39,7 +39,7 @@ def mock_requestget(*args, **kwargs):
                 "probafog": 0,
                 "probawind70": 0,
                 "probawind100": 0,
-                "gustx": 45
+                "gustx": 45,
             },
             {
                 "insee": "35238",
@@ -63,7 +63,7 @@ def mock_requestget(*args, **kwargs):
                 "probafog": 0,
                 "probawind70": 0,
                 "probawind100": 0,
-                "gustx": 38
+                "gustx": 38,
             },
             {
                 "insee": "35238",
@@ -87,7 +87,7 @@ def mock_requestget(*args, **kwargs):
                 "probafog": 0,
                 "probawind70": 0,
                 "probawind100": 0,
-                "gustx": 29
+                "gustx": 29,
             },
             {
                 "insee": "35238",
@@ -111,7 +111,7 @@ def mock_requestget(*args, **kwargs):
                 "probafog": 0,
                 "probawind70": 0,
                 "probawind100": 0,
-                "gustx": 30
+                "gustx": 30,
             },
             {
                 "insee": "35238",
@@ -135,7 +135,7 @@ def mock_requestget(*args, **kwargs):
                 "probafog": 0,
                 "probawind70": 0,
                 "probawind100": 0,
-                "gustx": 30
+                "gustx": 30,
             },
             {
                 "insee": "35238",
@@ -159,7 +159,7 @@ def mock_requestget(*args, **kwargs):
                 "probafog": 0,
                 "probawind70": 0,
                 "probawind100": 0,
-                "gustx": 27
+                "gustx": 27,
             },
             {
                 "insee": "35238",
@@ -183,7 +183,7 @@ def mock_requestget(*args, **kwargs):
                 "probafog": 0,
                 "probawind70": 0,
                 "probawind100": 0,
-                "gustx": 23
+                "gustx": 23,
             },
             {
                 "insee": "35238",
@@ -207,7 +207,7 @@ def mock_requestget(*args, **kwargs):
                 "probafog": 0,
                 "probawind70": 0,
                 "probawind100": 0,
-                "gustx": 31
+                "gustx": 31,
             },
             {
                 "insee": "35238",
@@ -231,7 +231,7 @@ def mock_requestget(*args, **kwargs):
                 "probafog": 0,
                 "probawind70": 0,
                 "probawind100": 0,
-                "gustx": 38
+                "gustx": 38,
             },
             {
                 "insee": "35238",
@@ -255,7 +255,7 @@ def mock_requestget(*args, **kwargs):
                 "probafog": 0,
                 "probawind70": 10,
                 "probawind100": 0,
-                "gustx": 39
+                "gustx": 39,
             },
             {
                 "insee": "35238",
@@ -279,7 +279,7 @@ def mock_requestget(*args, **kwargs):
                 "probafog": 0,
                 "probawind70": 10,
                 "probawind100": 0,
-                "gustx": 39
+                "gustx": 39,
             },
             {
                 "insee": "35238",
@@ -303,7 +303,7 @@ def mock_requestget(*args, **kwargs):
                 "probafog": 0,
                 "probawind70": 10,
                 "probawind100": 0,
-                "gustx": 39
+                "gustx": 39,
             },
             {
                 "insee": "35238",
@@ -327,7 +327,7 @@ def mock_requestget(*args, **kwargs):
                 "probafog": 0,
                 "probawind70": 10,
                 "probawind100": 0,
-                "gustx": 48
+                "gustx": 48,
             },
             {
                 "insee": "35238",
@@ -351,31 +351,32 @@ def mock_requestget(*args, **kwargs):
                 "probafog": 0,
                 "probawind70": 10,
                 "probawind100": 0,
-                "gustx": 47
-            }
-        ]
+                "gustx": 47,
+            },
+        ],
     }
-    
+
     class mock_response:
-        def __init__(self,data):
+        def __init__(self, data):
             self.data = json.dumps(data)
             self.status_code = self.status()
-            
+
         def status(self):
             return 200
-        
+
         def json(self):
             return json.loads(self.data)
 
     response = mock_response(datastructure)
     return response
 
+
 @pytest.mark.django_db
 def test_response_status_is_200(mocker):
     """test if get_weekly forecast method create meteo objects in database"""
-    
+
     mocker.patch("requests.get", mock_requestget)
     api_caller = Weathermanager()
-    result = api_caller.get_weekly_forecast(35238)
+    api_caller.get_weekly_forecast(35238)
     meteo = MeteoData.objects.all()
     assert meteo is not None
