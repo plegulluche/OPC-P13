@@ -45,6 +45,10 @@ def get_date(req_month):
 
 
 def prev_month(d):
+    """
+    Function enabling us to use buttons to scroll backwards throught months to display
+    other months for out calendar.
+    """
     first = d.replace(day=1)
     prev_month = first - timedelta(days=1)
     month = "month=" + str(prev_month.year) + "-" + str(prev_month.month)
@@ -52,6 +56,10 @@ def prev_month(d):
 
 
 def next_month(d):
+    """
+    Function enabling us to use buttons to scroll onwards throught months to display
+    other months for out calendar.
+    """
     days_in_month = monthrange(d.year, d.month)[1]
     last = d.replace(day=days_in_month)
     next_month = last + timedelta(days=1)
@@ -60,6 +68,9 @@ def next_month(d):
 
 
 def single_day_view(request, month, day):
+    """
+    View that display events for a specific day from the calendar.
+    """
     context = {}
     user = Account.objects.get(pk=request.user.id)
     events_for_day = Evenement.objects.filter(

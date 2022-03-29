@@ -6,7 +6,7 @@ from account.forms import RegisterUserForm, AccountAuthenticationForm
 from event.models import City, Customer, Evenement
 
 
-def registration_view(request, *args, **kwargs):
+def registration_view(request):
     """
     View to register users and log them in uppon registration.
     """
@@ -33,6 +33,9 @@ def registration_view(request, *args, **kwargs):
 
 
 def login_view(request):
+    """
+    View that allow us to login a user 
+    """
     context = {}
     user = request.user
     if user.is_authenticated:
@@ -54,12 +57,19 @@ def login_view(request):
 
 
 def logout_view(request):
+    """
+    View that allow us to log out a user 
+    and redirect him to the mainpage
+    """
     logout(request)
     return redirect("mainpage")
 
 
 @login_required
 def account_view(request):
+    """
+    View that display the account page of a logged in user
+    """
     active_user = request.user.id
     all_events = Evenement.objects.filter(user=active_user)
     all_customers = Customer.objects.filter(user=active_user)
@@ -71,6 +81,10 @@ def account_view(request):
 
 @login_required
 def account_customer_view(request):
+    """
+    View that allow us to diplay the list of customers 
+    attached to a specific user
+    """
     current_user = request.user.id
     customers = Customer.objects.filter(user=current_user)
     context = {"customers": customers}
@@ -79,6 +93,9 @@ def account_customer_view(request):
 
 @login_required
 def account_events_view(request):
+    """
+    View that allow us to display a list of all the events for a specific user
+    """
     current_user = request.user.id
     events = Evenement.objects.filter(user=current_user)
     context = {"events": events}

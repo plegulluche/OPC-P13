@@ -74,6 +74,10 @@ def add_customer_event_view(request):
 
 @login_required
 def update_customer_event_view(request, eventid):
+    """
+    View that display the AddCustomerEventForm filled with that customer
+    infos and allows the user to modify it.
+    """
     context = {}
     event = Evenement.objects.get(pk=eventid)
     type = "chantier"
@@ -101,6 +105,10 @@ def update_customer_event_view(request, eventid):
 
 @login_required
 def update_maintenance_event_view(request, eventid):
+    """
+    View that display the AddMaintenanceEventForm with an event infos
+    and allow the corresponding user to modify the datas of that event
+    """
     context = {}
     event = Evenement.objects.get(pk=eventid)
     form = AddMaintenanceEventForm(request.POST or None, instance=event)
@@ -119,12 +127,18 @@ def update_maintenance_event_view(request, eventid):
 
 
 def render_update_success_page(request):
+    """
+    Display a success message after a user used the form to update
+    an event or a customer.
+    """
     return render(request, "event/update_success.html")
 
 
 @login_required
 def delete_event_view(request, eventid):
-    """ """
+    """
+    View that allow a user to delete an event.
+    """
     event = Evenement.objects.get(pk=eventid)
     if request.method == "POST":
         event.delete()
@@ -136,7 +150,7 @@ def delete_event_view(request, eventid):
 @login_required
 def add_customer_view(request):
     """
-    View creating new customer from post data of a creation form
+    View creating new customer from post data with AddCustomerForm
     """
     cities = City.objects.all()
     context = {}
@@ -160,7 +174,9 @@ def add_customer_view(request):
 
 @login_required
 def delete_customer_view(request, customerid):
-    """ """
+    """
+    View that allow a user to delete a customer. 
+    """
     customer = Customer.objects.get(pk=customerid)
     if request.method == "POST":
         customer.delete()
@@ -171,7 +187,10 @@ def delete_customer_view(request, customerid):
 
 @login_required
 def edit_customer_view(request, customerid):
-    """ """
+    """ 
+    View that allow a user to edit datas of a customer with a 
+    pre-filled AddCustomerForm with customer datas.
+    """
     context = {}
     customer = Customer.objects.get(pk=customerid)
     if request.method == "POST":
