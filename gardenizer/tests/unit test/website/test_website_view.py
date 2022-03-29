@@ -18,3 +18,9 @@ def test_about_page_view():
     response = CLIENT.get(reverse('about'))
     assert response.status_code == 200
     assertTemplateUsed(response,'website/about.html')
+    
+def test_404_page():
+    path = "/legals/ffsef/"
+    request = CLIENT.get(path)
+    assert request.status_code == 200
+    assertTemplateUsed(request,'website/not-found.html')
