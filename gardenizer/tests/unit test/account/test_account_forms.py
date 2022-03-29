@@ -7,8 +7,8 @@ def test_yes_register_user_form():
     data = {
         'email':'testuser@gmail.com',
         'username':'testuser',
-        'password1':'Xqjrqp8800',
-        'password2':'Xqjrqp8800'
+        'password1':'UnMotDePasse12',
+        'password2':'UnMotDePasse12'
     }
     form = RegisterUserForm(data)
     assert form.is_valid() == True
@@ -22,8 +22,8 @@ def test_mail_already_in_use_register_user_form():
     data = {
         'email':'testuser@gmail.com',
         'username':'testuser',
-        'password1':'Xqjrqp8800',
-        'password2':'Xqjrqp8800'
+        'password1':'UnMotDePasse12',
+        'password2':'UnMotDePasse12'
     }
     form = RegisterUserForm(data)
     assert form.is_valid() == False
@@ -37,8 +37,8 @@ def test_username_already_in_use_register_user_form():
     data = {
         'email':'testuser2@gmail.com',
         'username':'testuser2',
-        'password1':'Xqjrqp8800',
-        'password2':'Xqjrqp8800'
+        'password1':'UnMotDePasse12',
+        'password2':'UnMotDePasse12'
     }
     form = RegisterUserForm(data)
     assert form.is_valid() == False
@@ -51,7 +51,7 @@ def test_wrong_credentials_account_auth_user_form():
     )
     data = {
         'email':'testuser@gmail.com',
-        'password':'Xqjrqp8800'
+        'password':'UnMotDePasse12'
     }
     form = AccountAuthenticationForm(data)
     assert form.is_valid() == False
@@ -60,7 +60,7 @@ def test_wrong_credentials_account_auth_user_form():
 def test_no_user_account_auth_user_form():
     data = {
         'email':'testuser@gmail.com',
-        'password':'Xqjrqp8800'
+        'password':'UnMotDePasse12'
     }
     form = AccountAuthenticationForm(data)
     assert form.is_valid() == False   
