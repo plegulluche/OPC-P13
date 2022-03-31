@@ -13,15 +13,15 @@ The app is multi-user, users must create an account in order to have access to a
 
 ## Functionnalities
 
--Create an account.
--Connect to an account.
--Create events.
--Create customers.
--Delete and edit customers and events.
--View on all events for a given day.
--A calendar displaying all events for a month.
--A meteo functionnality to display meteo data.
--Meteo data for each event.
+- Create an account.
+- Connect to an account.
+- Create events.
+- Create customers.
+- Delete and edit customers and events.
+- View on all events for a given day.
+- A calendar displaying all events for a month.
+- A meteo functionnality to display meteo data.
+- Meteo data for each event.
 
 ### Requirements
 
