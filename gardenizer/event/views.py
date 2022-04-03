@@ -175,7 +175,7 @@ def add_customer_view(request):
 @login_required
 def delete_customer_view(request, customerid):
     """
-    View that allow a user to delete a customer. 
+    View that allow a user to delete a customer.
     """
     customer = Customer.objects.get(pk=customerid)
     if request.method == "POST":
@@ -187,8 +187,8 @@ def delete_customer_view(request, customerid):
 
 @login_required
 def edit_customer_view(request, customerid):
-    """ 
-    View that allow a user to edit datas of a customer with a 
+    """
+    View that allow a user to edit datas of a customer with a
     pre-filled AddCustomerForm with customer datas.
     """
     context = {}

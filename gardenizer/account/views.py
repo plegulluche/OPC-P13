@@ -34,7 +34,7 @@ def registration_view(request):
 
 def login_view(request):
     """
-    View that allow us to login a user 
+    View that allow us to login a user
     """
     context = {}
     user = request.user
@@ -58,7 +58,7 @@ def login_view(request):
 
 def logout_view(request):
     """
-    View that allow us to log out a user 
+    View that allow us to log out a user
     and redirect him to the mainpage
     """
     logout(request)
@@ -82,7 +82,7 @@ def account_view(request):
 @login_required
 def account_customer_view(request):
     """
-    View that allow us to diplay the list of customers 
+    View that allow us to diplay the list of customers
     attached to a specific user
     """
     current_user = request.user.id
