@@ -8,8 +8,8 @@
 {% block content %}
 
 <div class="navbar-buttons">
-	<button class='nav-button'><a href="{% url 'calendar' %}?{{ prev_month }}"> Previous Month </a></button>
-	<button class='nav-button'><a href="{% url 'calendar' %}?{{ next_month }}"> Next Month </a></button>
+	<button class='nav-button'><a href="{% url 'calendar' %}?{{ prev_month }}"> Moi précédant </a></button>
+	<button class='nav-button'><a href="{% url 'calendar' %}?{{ next_month }}"> Moi suivant </a></button>
 </div>
 <div class="cal-container" style="padding:30px; color:white;">
 {{ calendar }}
